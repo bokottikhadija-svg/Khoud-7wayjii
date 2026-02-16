@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Inter:wght@300;400;600;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap');
         
         :root {
             --balna-bg: #fdfdfb;
@@ -22,13 +22,13 @@
             margin: 0;
             padding: 0;
             min-height: 100vh;
+            scroll-behavior: smooth;
         }
 
         h1, h2, h3, .serif {
             font-family: 'Cormorant Garamond', serif;
         }
 
-        /* Modaux */
         .modal {
             display: none;
             position: fixed;
@@ -41,46 +41,128 @@
             backdrop-filter: blur(10px);
             align-items: center;
             justify-content: center;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            color: #4a4a4a;
+        }
+
+        .form-label span {
+            color: #ff4d4d;
+            margin-left: 2px;
+        }
+
+        .input-classic {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d1cf;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-classic:focus {
+            border-color: #000;
         }
 
         .btn-black {
             background: var(--balna-accent);
             color: white;
-            padding: 1.25rem 2.5rem;
+            width: 100%;
+            padding: 16px;
             text-transform: uppercase;
-            letter-spacing: 0.3em;
-            font-size: 10px;
+            letter-spacing: 0.2em;
+            font-size: 11px;
             font-weight: 700;
-            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-            border: 1px solid var(--balna-accent);
+            transition: all 0.3s ease;
             cursor: pointer;
+            border: none;
+            margin-top: 10px;
         }
 
         .btn-black:hover {
-            background: transparent;
-            color: var(--balna-accent);
-            transform: translateY(-2px);
+            opacity: 0.9;
         }
 
-        .btn-home {
-            background: transparent;
-            border: 2px solid var(--balna-accent);
-            padding: 0.8rem 2rem;
-            font-size: 14px;
-            font-weight: 800;
-            letter-spacing: 0.1em;
+        .btn-outline {
+            text-[10px] font-bold uppercase tracking-widest border border-black px-5 py-3 hover:bg-black hover:text-white transition-all;
+        }
+
+        .btn-google {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #d1d1cf;
+            background: white;
+            font-size: 12px;
+            font-weight: 600;
             text-transform: uppercase;
-            transition: all 0.3s ease;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background 0.3s;
         }
 
-        /* Casiers cliquables */
+        .btn-google:hover {
+            background: #f9f9f9;
+        }
+
+        .photo-upload {
+            width: 100%;
+            height: 200px;
+            border: 2px dashed #d1d1cf;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #fcfcfc;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .photo-upload:hover {
+            border-color: #000;
+            background: #f5f5f5;
+        }
+
+        .photo-preview {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
         .market-locker {
-            height: 70vh;
+            height: 60vh;
             overflow: hidden;
             position: relative;
             cursor: pointer;
             transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            border: 1px solid var(--balna-border);
         }
 
         .market-locker img {
@@ -91,38 +173,17 @@
         }
 
         .market-locker:hover img {
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
         .locker-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%);
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            padding: 3rem;
-            transition: background 0.4s ease;
-        }
-
-        .market-locker:hover .locker-overlay {
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 100%);
-        }
-
-        .input-balna {
-            border-bottom: 1px solid var(--balna-border);
-            padding: 1rem 0;
-            width: 100%;
-            outline: none;
-            background: transparent;
-            font-size: 1.1rem;
-        }
-
-        .product-card {
-            border: 1px solid var(--balna-border);
-            padding: 1rem;
-            background: white;
-            transition: transform 0.3s ease;
+            padding: 2.5rem;
         }
 
         #loader {
@@ -139,8 +200,16 @@
             100% { transform: translateX(100%); }
         }
 
-        body.modal-open {
-            overflow: hidden;
+        .nav-link {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            transition: opacity 0.3s;
+        }
+
+        .nav-link:hover {
+            opacity: 0.6;
         }
     </style>
 </head>
@@ -150,133 +219,214 @@
 
     <div id="main-content">
         <!-- Navigation -->
-        <nav class="sticky top-0 z-[100] bg-white/90 backdrop-blur-md border-b border-[#f0f0ed]">
+        <nav class="sticky top-0 z-[100] bg-white border-b border-[#f0f0ed]">
             <div class="max-w-[1600px] mx-auto px-6 lg:px-16">
                 <div class="flex justify-between items-center h-24">
-                    <!-- LOGO -->
                     <div class="flex items-center space-x-6">
-                        <div class="w-14 h-14 border border-black flex items-center justify-center overflow-hidden bg-white">
-                            <img src="assets/logo de la marque .jpg" alt="Logo" class="w-full h-full object-cover" onerror="this.src='https://api.placeholder.com/100/100?text=KH'">
+                        <div class="w-12 h-12 border border-black flex items-center justify-center overflow-hidden bg-white cursor-pointer" onclick="window.scrollTo(0,0)">
+                            <img src="https://api.placeholder.com/100/100?text=KH" alt="Logo" class="w-full h-full object-cover">
                         </div>
-                        <div class="flex flex-col">
-                            <span class="serif text-2xl md:text-3xl font-bold tracking-tighter leading-none">KHOUD-7WAYJI</span>
-                            <span class="text-[7px] tracking-[0.4em] uppercase opacity-50 mt-1">Archive & Seconde Main</span>
+                        <div class="flex flex-col cursor-pointer" onclick="window.scrollTo(0,0)">
+                            <span class="serif text-2xl font-bold tracking-tighter">KHOUD-7WAYJI</span>
+                            <span class="text-[7px] tracking-[0.4em] uppercase opacity-50">Archive Store</span>
                         </div>
                     </div>
 
-                    <!-- ACTIONS -->
-                    <div class="flex items-center space-x-4">
-                        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="hidden md:block btn-home">ACCUEIL</button>
-                        <button id="authBtn" onclick="openModal('signupModal')" class="btn-black !py-3 !px-6 md:!py-5 md:!px-10">S'inscrire</button>
-                        <div id="userBadge" class="hidden text-[10px] font-bold uppercase tracking-widest border border-black px-4 py-2">Membre</div>
+                    <div class="flex items-center space-x-4 md:space-x-8">
+                        <button onclick="window.scrollTo(0,0)" class="nav-link hidden md:block">Accueil</button>
+                        <button onclick="openModal('loginModal')" class="nav-link">Connexion</button>
+                        <button onclick="openModal('signupModal')" class="text-[10px] font-bold uppercase tracking-widest border border-black px-6 py-3 hover:bg-black hover:text-white transition-all">S'inscrire</button>
+                        <div id="userBadge" class="hidden text-[10px] font-bold uppercase tracking-widest bg-black text-white px-4 py-2">Membre</div>
                     </div>
                 </div>
             </div>
         </nav>
 
         <!-- Hero -->
-        <header class="pt-16 pb-12 px-8 text-center">
-            <h1 class="text-6xl md:text-[8rem] font-medium leading-[0.85] tracking-tighter mb-6">
+        <header id="hero" class="pt-20 pb-12 px-8 text-center">
+            <h1 class="text-6xl md:text-[7rem] font-medium leading-[0.85] tracking-tighter mb-6">
                 No cash?<br>
                 <span class="italic font-light">No drama.</span>
             </h1>
-            <p class="serif text-xl md:text-2xl italic text-gray-400">"Khoud l-style, flex l-vibe"</p>
+            <p class="serif text-xl italic text-gray-400">"Trouvez votre perle rare dans l'archive"</p>
         </header>
 
-        <!-- Casiers de Marché (Cliquables) -->
-        <section class="max-w-[1600px] mx-auto px-6 lg:px-16 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Casier Homme -->
+        <!-- Casiers de Marché -->
+        <section class="max-w-[1400px] mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="market-locker group" onclick="filterGallery('homme')">
-                    <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&q=80&w=1200" alt="Collection Homme">
+                    <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&q=80&w=1200" alt="Hommes">
                     <div class="locker-overlay text-white">
-                        <span class="text-[10px] uppercase tracking-[0.5em] font-bold mb-4 opacity-70 group-hover:opacity-100 transition-opacity">Explorer le vestiaire</span>
-                        <h2 class="serif text-6xl italic leading-none">Hommes</h2>
-                        <div class="mt-8 flex items-center space-x-4 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
-                            <span class="text-[10px] font-bold tracking-widest uppercase">Voir la collection</span>
-                            <i class="fas fa-arrow-right text-xs"></i>
-                        </div>
+                        <h2 class="serif text-5xl italic">Hommes</h2>
+                        <p class="text-[9px] uppercase tracking-widest mt-2">Explorer le vestiaire</p>
                     </div>
                 </div>
 
-                <!-- Casier Femme -->
                 <div class="market-locker group" onclick="filterGallery('femme')">
-                    <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&q=80&w=1200" alt="Collection Femme">
+                    <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&q=80&w=1200" alt="Femmes">
                     <div class="locker-overlay text-white">
-                        <span class="text-[10px] uppercase tracking-[0.5em] font-bold mb-4 opacity-70 group-hover:opacity-100 transition-opacity">Explorer le vestiaire</span>
-                        <h2 class="serif text-6xl italic leading-none">Femmes</h2>
-                        <div class="mt-8 flex items-center space-x-4 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
-                            <span class="text-[10px] font-bold tracking-widest uppercase">Voir la collection</span>
-                            <i class="fas fa-arrow-right text-xs"></i>
-                        </div>
+                        <h2 class="serif text-5xl italic">Femmes</h2>
+                        <p class="text-[9px] uppercase tracking-widest mt-2">Explorer le vestiaire</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Galerie -->
-        <main id="market-section" class="max-w-[1600px] mx-auto px-6 lg:px-16 py-12">
-            <div class="flex justify-between items-end mb-12 border-b border-gray-100 pb-8">
-                <div>
-                    <h3 id="galleryTitle" class="serif text-4xl md:text-5xl italic">Articles Récents</h3>
-                    <button id="resetFilter" onclick="filterGallery('all')" class="hidden text-[9px] uppercase tracking-widest font-black mt-4 hover:underline">Voir tout l'archive</button>
-                </div>
-                <div id="dropCount" class="text-[10px] uppercase tracking-widest font-bold">Chargement...</div>
+        <main id="market-section" class="max-w-[1400px] mx-auto px-6 py-12 border-t border-gray-100 mt-12">
+            <div class="flex justify-between items-end mb-12">
+                <h3 id="galleryTitle" class="serif text-4xl italic">Dernières pépites</h3>
+                <div id="dropCount" class="text-[10px] uppercase tracking-widest font-bold">0 Article</div>
             </div>
             
-            <div id="galleryContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                 <!-- JavaScript injecte les données ici -->
+            <div id="galleryContainer" class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Articles injectés ici -->
             </div>
 
-            <div class="mt-20 flex flex-col items-center space-y-10">
-                <button onclick="openModal('profileModal')" class="btn-black">Déposer un article</button>
-                <a href="https://www.instagram.com/khoud_7wayji/" target="_blank" class="flex items-center space-x-6 px-10 py-5 bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-full hover:scale-105 transition-transform shadow-xl">
-                    <i class="fab fa-instagram text-2xl"></i>
-                    <span class="font-bold tracking-[0.2em] uppercase text-sm">SUIVEZ-NOUS SUR INSTAGRAM</span>
-                </a>
+            <div class="mt-20 flex flex-col items-center">
+                <button onclick="openModal('depositModal')" class="bg-black text-white px-12 py-5 text-[11px] font-bold uppercase tracking-[0.3em] hover:opacity-80 transition-all">Déposer un article</button>
             </div>
         </main>
 
-        <footer class="py-16 border-t border-gray-100 mt-20 text-center">
-            <span class="text-[10px] uppercase tracking-[0.3em] font-bold">Khoud-7wayji © 2024</span>
-            <div id="userIdDisplay" class="text-gray-300 text-[8px] mt-4"></div>
+        <!-- Footer -->
+        <footer class="py-20 border-t border-[#f0f0ed] text-center">
+            <div class="mb-8">
+                <p class="text-[9px] uppercase tracking-[0.4em] opacity-50 mb-4">Rejoignez la communauté</p>
+                <a href="https://www.instagram.com/khoud_7wayji/" target="_blank" class="inline-flex items-center space-x-3 group">
+                    <div class="w-12 h-12 border border-black flex items-center justify-center group-hover:bg-black group-hover:text-white transition-all">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </div>
+                    <span class="text-[11px] font-bold uppercase tracking-widest">@khoud_7wayji</span>
+                </a>
+            </div>
+            <p class="text-[8px] uppercase tracking-widest opacity-30 mt-10">© 2024 Khoud-7wayji Archive. Tout échange est final.</p>
         </footer>
     </div>
 
-    <!-- Modaux -->
-    <div id="profileModal" class="modal">
-        <div class="bg-white w-full max-w-2xl p-10 shadow-2xl relative">
-            <button onclick="closeModal('profileModal')" class="absolute top-6 right-6 text-3xl">&times;</button>
-            <h3 class="serif text-4xl mb-8 italic text-center">Déposer un article</h3>
-            <div class="space-y-8">
-                <input type="text" id="itemName" placeholder="Nom de l'article" class="input-balna">
-                <select id="itemCategory" class="input-balna bg-white">
-                    <option value="all">Catégorie</option>
-                    <option value="homme">Homme</option>
-                    <option value="femme">Femme</option>
-                </select>
-                <input type="number" id="itemPrice" placeholder="Prix (MAD)" class="input-balna">
-                <button onclick="handleDeposit()" class="btn-black w-full">Publier l'article</button>
-            </div>
-        </div>
-    </div>
+    <!-- MODAL CONNEXION -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <button onclick="closeModal('loginModal')" class="absolute top-6 right-6 text-2xl">&times;</button>
+            <h2 class="serif text-4xl mb-10 italic">Se connecter</h2>
+            
+            <button onclick="handleGoogleSignIn()" class="btn-google">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/action/google.svg" class="w-4 h-4 mr-3">
+                Continuer avec Google
+            </button>
 
-    <div id="signupModal" class="modal">
-        <div class="bg-white w-full max-w-md p-10 shadow-2xl relative">
-            <button onclick="closeModal('signupModal')" class="absolute top-6 right-6 text-3xl">&times;</button>
-            <h2 class="serif text-4xl mb-8 italic text-center">Rejoindre l'Archive</h2>
-            <form onsubmit="handleRegistration(event)" class="space-y-8">
-                <input type="text" id="regName" placeholder="Nom Complet" required class="input-balna">
-                <input type="email" id="regEmail" placeholder="Email" required class="input-balna">
-                <button type="submit" class="btn-black w-full">S'inscrire</button>
+            <div class="relative flex py-5 items-center">
+                <div class="flex-grow border-t border-gray-200"></div>
+                <span class="flex-shrink mx-4 text-gray-400 text-[10px] uppercase font-bold tracking-widest">ou</span>
+                <div class="flex-grow border-t border-gray-200"></div>
+            </div>
+
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label class="form-label">Email <span>*</span></label>
+                    <input type="email" required class="input-classic">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mot de passe <span>*</span></label>
+                    <input type="password" required class="input-classic">
+                </div>
+                <button type="submit" class="btn-black">Accéder à mon compte</button>
             </form>
         </div>
     </div>
 
-    <!-- Alertes -->
-    <div id="alertBox" class="fixed bottom-10 left-1/2 -translate-x-1/2 z-[15000] opacity-0 transition-all duration-500 translate-y-8 pointer-events-none">
-        <div class="bg-black text-white px-8 py-4 shadow-2xl">
-            <span id="alertMessage" class="text-[10px] uppercase tracking-widest font-bold"></span>
+    <!-- MODAL INSCRIPTION -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <button onclick="closeModal('signupModal')" class="absolute top-6 right-6 text-2xl">&times;</button>
+            <h2 class="serif text-4xl mb-10 italic">S'inscrire</h2>
+            
+            <button onclick="handleGoogleSignIn()" class="btn-google">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/action/google.svg" class="w-4 h-4 mr-3">
+                Continuer avec Google
+            </button>
+
+            <div class="relative flex py-5 items-center">
+                <div class="flex-grow border-t border-gray-200"></div>
+                <span class="flex-shrink mx-4 text-gray-400 text-[10px] uppercase font-bold tracking-widest">ou</span>
+                <div class="flex-grow border-t border-gray-200"></div>
+            </div>
+
+            <form onsubmit="handleRegistration(event)">
+                <div class="form-group">
+                    <label class="form-label">Nom Complet <span>*</span></label>
+                    <input type="text" id="regName" required class="input-classic">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email <span>*</span></label>
+                    <input type="email" id="regEmail" required class="input-classic">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mot de passe <span>*</span></label>
+                    <input type="password" required class="input-classic">
+                </div>
+                <button type="submit" class="btn-black">Créer mon profil</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL DÉPÔT D'ARTICLE -->
+    <div id="depositModal" class="modal">
+        <div class="modal-content max-w-xl">
+            <button onclick="closeModal('depositModal')" class="absolute top-6 right-6 text-2xl">&times;</button>
+            <h2 class="serif text-4xl mb-8 italic">Déposer un article</h2>
+            
+            <div class="space-y-6">
+                <div class="form-group">
+                    <label class="form-label">Photo de l'article <span>*</span></label>
+                    <div class="photo-upload" onclick="document.getElementById('photoInput').click()">
+                        <div id="uploadPlaceholder" class="flex flex-col items-center">
+                            <i class="fas fa-camera text-2xl mb-2"></i>
+                            <span class="text-[10px] font-bold uppercase tracking-widest">Cliquez pour insérer</span>
+                        </div>
+                        <img id="imagePreview" class="photo-preview">
+                    </div>
+                    <input type="file" id="photoInput" class="hidden" accept="image/*" onchange="previewImage(this)">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="form-group">
+                        <label class="form-label">Nom <span>*</span></label>
+                        <input type="text" id="itemName" class="input-classic">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Catégorie <span>*</span></label>
+                        <select id="itemCategory" class="input-classic bg-white">
+                            <option value="homme">Homme</option>
+                            <option value="femme">Femme</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="form-group">
+                        <label class="form-label">Taille <span>*</span></label>
+                        <input type="text" id="itemSize" placeholder="Ex: M, 42..." class="input-classic">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Prix (MAD) <span>*</span></label>
+                        <input type="number" id="itemPrice" class="input-classic">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Description <span>*</span></label>
+                    <textarea id="itemDesc" class="input-classic h-24 resize-none" placeholder="État, matière, coupe..."></textarea>
+                </div>
+
+                <button onclick="handleDeposit()" class="btn-black">Publier l'article</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alerte -->
+    <div id="alertBox" class="fixed bottom-10 left-1/2 -translate-x-1/2 z-[15000] opacity-0 transition-all duration-500 pointer-events-none">
+        <div class="bg-black text-white px-8 py-4 shadow-2xl text-[10px] font-bold uppercase tracking-widest">
+            <span id="alertMessage"></span>
         </div>
     </div>
 
@@ -292,141 +442,136 @@
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'khoud-7wayji-main';
 
         let currentUser = null;
-        let currentFilter = 'all';
+        let selectedImage = null;
 
-        const startGallery = (user) => {
-            if (!user) return;
+        window.previewImage = (input) => {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    document.getElementById('imagePreview').src = e.target.result;
+                    document.getElementById('imagePreview').style.display = 'block';
+                    document.getElementById('uploadPlaceholder').style.display = 'none';
+                    selectedImage = e.target.result;
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        };
+
+        const loadGallery = (filter = 'all') => {
+            if (!currentUser) return;
             const q = query(collection(db, 'artifacts', appId, 'public', 'data', 'articles'));
             onSnapshot(q, (snapshot) => {
                 const container = document.getElementById('galleryContainer');
-                const countDisplay = document.getElementById('dropCount');
-                
                 let articles = [];
                 snapshot.forEach(doc => articles.push({ id: doc.id, ...doc.data() }));
 
-                // Filtrage local
-                if (currentFilter !== 'all') {
-                    articles = articles.filter(a => a.category === currentFilter);
-                }
+                if (filter !== 'all') articles = articles.filter(a => a.category === filter);
 
-                if (articles.length === 0) {
-                    container.innerHTML = `<div class="col-span-full py-20 text-center border border-dashed border-gray-200">
-                        <p class="serif text-xl italic text-gray-300">Aucun article trouvé pour cette sélection.</p>
-                    </div>`;
-                    countDisplay.textContent = "0 ARTICLE";
-                    return;
-                }
-
-                let html = '';
-                articles.forEach(item => {
-                    html += `
-                        <div class="product-card group cursor-pointer hover:shadow-xl transition-all duration-500">
-                            <div class="aspect-[3/4] bg-gray-100 mb-4 overflow-hidden relative">
-                                <img src="${item.imageUrl || 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=500'}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                                <div class="absolute top-4 left-4 bg-white px-3 py-1 text-[8px] uppercase font-bold tracking-widest">${item.category || 'Archive'}</div>
-                            </div>
-                            <h4 class="serif text-xl font-bold">${item.name}</h4>
-                            <p class="text-xs font-bold mt-2 tracking-widest">${item.price} MAD</p>
+                container.innerHTML = articles.map(item => `
+                    <div class="group">
+                        <div class="aspect-[3/4] bg-gray-100 mb-4 overflow-hidden relative border border-gray-100">
+                            <img src="${item.imageUrl}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute bottom-4 right-4 bg-white px-3 py-1 text-[8px] font-bold tracking-widest uppercase">${item.size}</div>
                         </div>
-                    `;
-                });
-                container.innerHTML = html;
-                countDisplay.textContent = `${articles.length} ${articles.length > 1 ? 'ARTICLES' : 'ARTICLE'}`;
-            }, (error) => console.log(error));
+                        <h4 class="serif text-xl font-bold">${item.name}</h4>
+                        <p class="text-[10px] font-bold mt-1 tracking-widest">${item.price} MAD</p>
+                    </div>
+                `).join('');
+                document.getElementById('dropCount').textContent = `${articles.length} Article${articles.length > 1 ? 's' : ''}`;
+            });
         };
 
-        window.filterGallery = (filter) => {
-            currentFilter = filter;
-            const title = document.getElementById('galleryTitle');
-            const resetBtn = document.getElementById('resetFilter');
-            
-            if (filter === 'all') {
-                title.textContent = "Articles Récents";
-                resetBtn.classList.add('hidden');
-            } else {
-                title.textContent = filter === 'homme' ? "Collection Hommes" : "Collection Femmes";
-                resetBtn.classList.remove('hidden');
-                document.getElementById('market-section').scrollIntoView({ behavior: 'smooth' });
-            }
-            
-            if (currentUser) startGallery(currentUser);
+        window.filterGallery = (cat) => {
+            document.getElementById('galleryTitle').textContent = cat === 'homme' ? "Vestiaire Hommes" : "Vestiaire Femmes";
+            loadGallery(cat);
+            // Faire défiler vers la section du marché
+            document.getElementById('market-section').scrollIntoView({ behavior: 'smooth' });
         };
 
         const initAuth = async () => {
-            try {
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
-                    await signInAnonymously(auth);
-                }
-            } catch (err) { console.error(err); }
+            if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                await signInWithCustomToken(auth, __initial_auth_token);
+            } else {
+                await signInAnonymously(auth);
+            }
         };
 
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 currentUser = user;
-                document.getElementById('userIdDisplay').textContent = `ID: ${user.uid}`;
-                startGallery(user);
+                loadGallery();
             }
         });
 
         initAuth();
 
+        window.handleLogin = (e) => {
+            e.preventDefault();
+            showAlert("Connexion réussie !");
+            closeModal('loginModal');
+            document.getElementById('userBadge').classList.remove('hidden');
+        };
+
+        window.handleGoogleSignIn = () => {
+            showAlert("Connexion Google simulée réussie !");
+            document.getElementById('userBadge').classList.remove('hidden');
+            closeModal('signupModal');
+            closeModal('loginModal');
+        };
+
         window.handleRegistration = async (e) => {
             e.preventDefault();
-            if (!currentUser) return;
             setLoading(true);
             try {
                 await setDoc(doc(db, 'artifacts', appId, 'users', currentUser.uid, 'profile', 'info'), {
                     name: document.getElementById('regName').value,
+                    email: document.getElementById('regEmail').value,
                     createdAt: serverTimestamp()
                 });
-                showAlert("Inscription validée !");
-                document.getElementById('authBtn').style.display = 'none';
+                showAlert("Bienvenue dans l'Archive !");
                 document.getElementById('userBadge').classList.remove('hidden');
                 closeModal('signupModal');
-            } catch (err) { showAlert("Erreur"); }
+            } catch (err) { showAlert("Erreur d'inscription"); }
             setLoading(false);
         };
 
         window.handleDeposit = async () => {
-            if (!currentUser) { showAlert("Connectez-vous d'abord"); return; }
+            if (!selectedImage) { showAlert("Ajoutez une photo !"); return; }
             const name = document.getElementById('itemName').value;
             const price = document.getElementById('itemPrice').value;
-            const category = document.getElementById('itemCategory').value;
+            const size = document.getElementById('itemSize').value;
             
-            if (!name || !price || category === 'all') { showAlert("Complétez tous les champs"); return; }
+            if (!name || !price || !size) { showAlert("Complétez tous les champs"); return; }
             
             setLoading(true);
             try {
                 await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'articles'), {
                     name, 
                     price: parseFloat(price), 
-                    category,
+                    size,
+                    category: document.getElementById('itemCategory').value,
+                    description: document.getElementById('itemDesc').value,
+                    imageUrl: selectedImage,
                     sellerId: currentUser.uid,
-                    createdAt: serverTimestamp(),
-                    imageUrl: category === 'homme' ? 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=500' : 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=500'
+                    createdAt: serverTimestamp()
                 });
-                showAlert("Article publié dans l'archive !");
-                closeModal('profileModal');
+                showAlert("Article mis en ligne !");
+                closeModal('depositModal');
+                selectedImage = null;
+                document.getElementById('imagePreview').style.display = 'none';
+                document.getElementById('uploadPlaceholder').style.display = 'flex';
             } catch (err) { showAlert("Erreur de publication"); }
             setLoading(false);
         };
 
-        window.openModal = (id) => {
-            document.getElementById(id).style.display = 'flex';
-            document.body.classList.add('modal-open');
-        };
-        window.closeModal = (id) => {
-            document.getElementById(id).style.display = 'none';
-            document.body.classList.remove('modal-open');
-        };
+        window.openModal = (id) => document.getElementById(id).style.display = 'flex';
+        window.closeModal = (id) => document.getElementById(id).style.display = 'none';
         window.setLoading = (s) => document.getElementById('loader').style.display = s ? 'block' : 'none';
         window.showAlert = (m) => {
             const b = document.getElementById('alertBox');
             document.getElementById('alertMessage').textContent = m;
-            b.classList.remove('opacity-0', 'translate-y-8');
-            setTimeout(() => b.classList.add('opacity-0', 'translate-y-8'), 3000);
+            b.classList.remove('opacity-0');
+            setTimeout(() => b.classList.add('opacity-0'), 3000);
         };
     </script>
 </body>
