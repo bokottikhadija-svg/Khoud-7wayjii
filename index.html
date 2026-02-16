@@ -55,7 +55,7 @@
             margin: auto;
         }
 
-        .form-group { margin-bottom: 24px; }
+        .form-group { margin-bottom: 20px; }
 
         .form-label {
             display: block;
@@ -69,55 +69,15 @@
 
         .input-classic {
             width: 100%;
-            padding: 12px 0;
-            border: none;
-            border-bottom: 1px solid #d1d1cf;
+            padding: 12px;
+            border: 1px solid #d1d1cf;
             font-size: 14px;
             outline: none;
             transition: border-color 0.3s ease;
-            background: transparent;
         }
 
-        .input-classic:focus { border-bottom-color: black; }
-
-        .file-upload-zone {
-            border: 1px dashed #d1d1cf;
-            padding: 40px 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            background: #ffffff;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-        }
-
-        .file-upload-zone:hover {
-            border-color: #000;
-            background: #f9f9f9;
-        }
-
-        .file-upload-icon {
-            width: 32px;
-            height: 32px;
-            background: #999;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-        }
-
-        .file-name-display {
-            font-size: 10px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #000;
+        .input-classic:focus {
+            border-color: black;
         }
 
         .btn-black {
@@ -132,10 +92,44 @@
             cursor: pointer;
             border: none;
             transition: opacity 0.3s;
-            margin-top: 10px;
         }
 
         .btn-black:hover { opacity: 0.9; }
+
+        .btn-outline {
+            background: transparent;
+            color: black;
+            border: 1px solid black;
+            width: 100%;
+            padding: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-outline:hover {
+            background: #f8f8f8;
+        }
+
+        .file-upload-wrapper {
+            border: 2px dashed #d1d1cf;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #fafafa;
+        }
+        .file-upload-wrapper:hover {
+            background: #f0f0f0;
+            border-color: black;
+        }
 
         .market-locker {
             height: 60vh;
@@ -162,24 +156,18 @@
             justify-content: flex-end;
             padding: 2.5rem;
         }
-
-        .admin-badge {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 50;
-        }
     </style>
 </head>
 <body>
 
-    <!-- Navigation -->
+    <!-- Navigation Agrandie -->
     <nav class="sticky top-0 z-[100] bg-white border-b border-[#f0f0ed]">
         <div class="max-w-[1600px] mx-auto px-6 lg:px-16">
             <div class="flex justify-between items-center h-32">
+                <!-- Logo Agrandi -->
                 <div class="flex items-center space-x-8 cursor-pointer" onclick="location.reload()">
                     <div class="w-16 h-16 border border-black flex items-center justify-center overflow-hidden bg-white">
-                        <img src="https://api.placeholder.com/100/100?text=KH" alt="KHOUD-7WAYJI" class="w-full h-full object-cover">
+                        <img src="assets/logo de la marque .jpg" alt="KHOUD-7WAYJI" class="w-full h-full object-cover" onerror="this.src='https://api.placeholder.com/100/100?text=KH'">
                     </div>
                     <div class="flex flex-col">
                         <span class="serif text-3xl font-bold tracking-tighter uppercase">KHOUD-7WAYJI</span>
@@ -188,12 +176,15 @@
                 </div>
 
                 <div class="flex items-center space-x-6 md:space-x-12">
+                    <!-- Bouton Instagram Ajouté -->
                     <a href="https://www.instagram.com/khoud_7wayji/" target="_blank" class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest hover:opacity-50">
                         <i class="fa-brands fa-instagram text-lg"></i>
                         <span class="hidden lg:inline">Instagram</span>
                     </a>
+                    
+                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-[11px] font-bold uppercase tracking-widest hover:opacity-50 hidden md:block">Accueil</button>
                     <button onclick="openModal('loginModal')" class="text-[11px] font-bold uppercase tracking-widest hover:opacity-50">Connexion</button>
-                    <button onclick="openModal('signupModal')" class="text-[11px] font-bold uppercase tracking-widest border-2 border-black px-8 py-4 hover:bg-black hover:text-white transition-all">S'inscrire</button>
+                    <button onclick="openModal('signupChoiceModal')" class="text-[11px] font-bold uppercase tracking-widest border-2 border-black px-8 py-4 hover:bg-black hover:text-white transition-all">S'inscrire</button>
                 </div>
             </div>
         </div>
@@ -205,20 +196,21 @@
             No cash?<br>
             <span class="italic font-light">No drama.</span>
         </h1>
-        <p class="serif text-2xl italic text-gray-400">"Trouvez votre perle rare dans l'archive"</p>
+        <p class="serif text-2xl italic text-gray-400">Khoud l-stlyle, flex l-vibe!</p>
     </header>
 
     <!-- Casiers de Marché -->
     <section class="max-w-[1400px] mx-auto px-6 py-12">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="market-locker group">
+            <div class="market-locker group" onclick="filterGallery('homme')">
                 <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&q=80&w=1200" alt="Hommes">
                 <div class="locker-overlay text-white">
                     <h2 class="serif text-5xl italic">Hommes</h2>
                     <p class="text-[9px] uppercase tracking-widest mt-2">Explorer le vestiaire</p>
                 </div>
             </div>
-            <div class="market-locker group">
+
+            <div class="market-locker group" onclick="filterGallery('femme')">
                 <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&q=80&w=1200" alt="Femmes">
                 <div class="locker-overlay text-white">
                     <h2 class="serif text-5xl italic">Femmes</h2>
@@ -231,90 +223,145 @@
     <!-- Galerie -->
     <main id="market-section" class="max-w-[1400px] mx-auto px-6 py-12 border-t border-gray-100 mt-12">
         <div class="flex justify-between items-end mb-12">
-            <h3 class="serif text-4xl italic">Dernières pépites</h3>
-            <div id="dropCount" class="text-[10px] uppercase tracking-widest font-bold">Chargement...</div>
+            <h3 id="galleryTitle" class="serif text-4xl italic">Dernières pépites</h3>
+            <div id="dropCount" class="text-[10px] uppercase tracking-widest font-bold">0 Article</div>
         </div>
+        
         <div id="galleryContainer" class="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            <!-- Articles publics -->
+            <!-- Articles injectés via JS -->
         </div>
+
         <div class="mt-20 flex flex-col items-center">
-            <button onclick="openModal('depositModal')" class="bg-black text-white px-12 py-5 text-[11px] font-bold uppercase tracking-[0.3em] hover:opacity-80 transition-all shadow-xl">Déposer un article</button>
+            <button onclick="openModal('depositModal')" class="bg-black text-white px-12 py-5 text-[11px] font-bold uppercase tracking-[0.3em] hover:opacity-80 transition-all cursor-pointer shadow-xl">Déposer un article</button>
         </div>
     </main>
+
+    <!-- MODAL CHOIX INSCRIPTION -->
+    <div id="signupChoiceModal" class="modal">
+        <div class="modal-content text-center">
+            <button onclick="closeModal('signupChoiceModal')" class="absolute top-6 right-6 text-2xl hover:opacity-50">&times;</button>
+            <h2 class="serif text-4xl mb-6 italic">Rejoignez-nous</h2>
+            <p class="text-[10px] uppercase tracking-widest text-gray-400 mb-10">Choisissez votre mode d'inscription</p>
+            
+            <div class="space-y-4">
+                <button onclick="showAlert('Redirection vers Google...'); closeModal('signupChoiceModal');" class="btn-outline">
+                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18" alt="Google">
+                    Continuer avec Google
+                </button>
+                <div class="flex items-center py-4">
+                    <div class="flex-1 border-t border-gray-100"></div>
+                    <span class="px-4 text-[10px] uppercase text-gray-300 font-bold">Ou</span>
+                    <div class="flex-1 border-t border-gray-100"></div>
+                </div>
+                <button onclick="closeModal('signupChoiceModal'); openModal('signupModal');" class="btn-black">
+                    Créer un compte classique
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- MODAL DÉPÔT D'ARTICLE -->
     <div id="depositModal" class="modal">
         <div class="modal-content">
-            <button onclick="closeModal('depositModal')" class="absolute top-6 right-6 text-2xl">&times;</button>
-            <h2 class="serif text-4xl mb-1 italic">Nouvel article</h2>
-            <p class="text-[9px] uppercase tracking-widest text-gray-400 mb-8 font-bold">Partagez votre pièce avec nous</p>
+            <button onclick="closeModal('depositModal')" class="absolute top-6 right-6 text-2xl hover:opacity-50">&times;</button>
+            <h2 class="serif text-4xl mb-4 italic">Nouvel article</h2>
+            <p class="text-[10px] uppercase tracking-widest text-gray-400 mb-8">Partagez votre pièce avec nous</p>
             
-            <form id="depositForm">
+            <form id="depositForm" onsubmit="event.preventDefault(); showAlert('Merci ! Votre article est en cours de validation.'); closeModal('depositModal');">
+                
                 <div class="form-group">
                     <label class="form-label">Photo de l'article *</label>
-                    <div class="file-upload-zone" onclick="document.getElementById('fileInput').click()">
-                        <div class="file-upload-icon"><i class="fa fa-plus"></i></div>
-                        <div id="fileNameDisplay" class="file-name-display">Ajouter une image</div>
-                        <input type="file" id="fileInput" class="hidden" accept="image/*" onchange="handleFileChange(this)">
+                    <div class="file-upload-wrapper" onclick="document.getElementById('articlePhoto').click()">
+                        <i class="fa fa-plus-circle mb-2 text-2xl opacity-40"></i>
+                        <p id="fileNameDisplay" class="text-[10px] uppercase tracking-widest font-bold">Cliquer pour joindre une image</p>
+                        <input type="file" id="articlePhoto" accept="image/*" class="hidden" required onchange="document.getElementById('fileNameDisplay').textContent = this.files[0].name">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Nom de l'article *</label>
-                    <input type="text" id="itemName" required class="input-classic" placeholder="Ex: CAPUCHE VINTAGE">
+                    <input type="text" required class="input-classic" placeholder="Ex: T-shirt Oversize Noir">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Catégorie *</label>
+                    <select required class="input-classic bg-white">
+                        <option value="" disabled selected>Choisir un vestiaire</option>
+                        <option value="homme">Homme</option>
+                        <option value="femme">Femme</option>
+                    </select>
                 </div>
 
                 <div class="grid grid-cols-2 gap-4">
                     <div class="form-group">
                         <label class="form-label">Taille *</label>
-                        <input type="text" id="itemSize" required class="input-classic" placeholder="M">
+                        <input type="text" required class="input-classic" placeholder="L / XL / 42">
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Prix (MAD) *</label>
-                        <input type="number" id="itemPrice" required class="input-classic" placeholder="200">
+                        <label class="form-label">Prix souhaité (MAD) *</label>
+                        <input type="number" required class="input-classic" placeholder="0">
                     </div>
                 </div>
 
-                <button type="submit" class="btn-black">Envoyer pour validation</button>
+                <div class="form-group">
+                    <label class="form-label">Description détaillée *</label>
+                    <textarea required class="input-classic h-24 resize-none" placeholder="État (neuf, porté), marque, couleur..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-black">Soumettre à l'équipe</button>
             </form>
         </div>
     </div>
 
-    <!-- MODAL AUTHENTIFICATION ADMIN (PIN) -->
-    <div id="adminAuthModal" class="modal">
+    <!-- MODAL CONNEXION -->
+    <div id="loginModal" class="modal">
         <div class="modal-content">
-            <button onclick="closeModal('adminAuthModal')" class="absolute top-6 right-6 text-2xl">&times;</button>
-            <h2 class="serif text-4xl mb-4 italic text-center">Accès Restreint</h2>
-            <p class="text-[10px] text-center uppercase tracking-widest mb-8">Entrez le code administrateur</p>
-            <div class="form-group">
-                <input type="password" id="adminPin" class="input-classic text-center text-2xl tracking-[1em]" placeholder="****" maxlength="4">
-            </div>
-            <button onclick="verifyAdmin()" class="btn-black">Déverrouiller</button>
-        </div>
-    </div>
-
-    <!-- Interface Admin (Modal) -->
-    <div id="adminModal" class="modal">
-        <div class="modal-content max-w-4xl">
-            <div class="flex justify-between items-start mb-8">
-                <div>
-                    <h2 class="serif text-4xl italic">Modération</h2>
-                    <p class="text-[9px] uppercase tracking-widest font-bold text-gray-400">Articles en attente de publication</p>
+            <button onclick="closeModal('loginModal')" class="absolute top-6 right-6 text-2xl">&times;</button>
+            <h2 class="serif text-4xl mb-10 italic">Se connecter</h2>
+            <form onsubmit="event.preventDefault(); showAlert('Bienvenue !'); closeModal('loginModal');">
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" required class="input-classic">
                 </div>
-                <button onclick="closeModal('adminModal')" class="text-2xl">&times;</button>
-            </div>
-            <div id="adminContainer" class="space-y-4 max-h-[60vh] overflow-y-auto pr-4">
-                <!-- Les articles en attente apparaîtront ici -->
-            </div>
+                <div class="form-group">
+                    <label class="form-label">Mot de passe</label>
+                    <input type="password" required class="input-classic">
+                </div>
+                <button type="submit" class="btn-black">Entrer</button>
+            </form>
         </div>
     </div>
 
-    <!-- Bouton Admin Flottant -->
-    <button onclick="tryOpenAdmin()" class="admin-badge bg-white border border-black px-4 py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-all">
-        <i class="fa fa-shield-halved mr-2"></i> Admin
-    </button>
+    <!-- MODAL INSCRIPTION CLASSIQUE -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <button onclick="closeModal('signupModal')" class="absolute top-6 right-6 text-2xl">&times;</button>
+            <h2 class="serif text-4xl mb-10 italic">S'inscrire</h2>
+            <form onsubmit="event.preventDefault(); showAlert('Compte créé avec succès !'); closeModal('signupModal');">
+                <div class="form-group">
+                    <label class="form-label">Email *</label>
+                    <input type="email" required class="input-classic">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="form-group">
+                        <label class="form-label">Prénom</label>
+                        <input type="text" class="input-classic">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Nom</label>
+                        <input type="text" class="input-classic">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mot de passe *</label>
+                    <input type="password" required class="input-classic">
+                </div>
+                <button type="submit" class="btn-black">Rejoindre la communauté</button>
+            </form>
+        </div>
+    </div>
 
-    <!-- Notification -->
+    <!-- Notifications -->
     <div id="alertBox" class="fixed bottom-10 left-1/2 -translate-x-1/2 z-[15000] opacity-0 transition-all duration-500 pointer-events-none">
         <div class="bg-black text-white px-8 py-4 shadow-2xl text-[10px] font-bold uppercase tracking-widest">
             <span id="alertMessage"></span>
@@ -324,144 +371,79 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, onSnapshot, addDoc, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, collection, onSnapshot, query } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Configuration
-        const ADMIN_PIN = "1234"; // CODE PAR DÉFAUT
-        let isAdminAuthenticated = false;
+        window.openModal = (id) => {
+            const m = document.getElementById(id);
+            if(m) m.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        };
+        
+        window.closeModal = (id) => {
+            const m = document.getElementById(id);
+            if(m) m.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        };
 
-        // Helpers globaux
-        window.openModal = (id) => { document.getElementById(id).style.display = 'flex'; document.body.style.overflow = 'hidden'; };
-        window.closeModal = (id) => { document.getElementById(id).style.display = 'none'; document.body.style.overflow = 'auto'; };
         window.showAlert = (msg) => {
             const box = document.getElementById('alertBox');
-            document.getElementById('alertMessage').textContent = msg;
-            box.classList.remove('opacity-0');
-            setTimeout(() => box.classList.add('opacity-0'), 3000);
-        };
-
-        window.handleFileChange = (input) => {
-            const display = document.getElementById('fileNameDisplay');
-            if (input.files && input.files[0]) {
-                display.textContent = input.files[0].name;
-            } else {
-                display.textContent = "Ajouter une image";
+            const txt = document.getElementById('alertMessage');
+            if(txt) txt.textContent = msg;
+            if(box) {
+                box.classList.remove('opacity-0');
+                box.classList.add('bottom-12');
+                setTimeout(() => {
+                    box.classList.add('opacity-0');
+                    box.classList.remove('bottom-12');
+                }, 3000);
             }
         };
 
-        // Gestion de la sécurité Admin
-        window.tryOpenAdmin = () => {
-            if (isAdminAuthenticated) {
-                openModal('adminModal');
-            } else {
-                openModal('adminAuthModal');
-            }
+        window.filterGallery = (cat) => {
+            const title = document.getElementById('galleryTitle');
+            if(title) title.textContent = cat === 'homme' ? "Vestiaire Hommes" : "Vestiaire Femmes";
+            document.getElementById('market-section').scrollIntoView({ behavior: 'smooth' });
+            if(window.loadGallery) window.loadGallery(cat);
         };
 
-        window.verifyAdmin = () => {
-            const input = document.getElementById('adminPin');
-            if (input.value === ADMIN_PIN) {
-                isAdminAuthenticated = true;
-                closeModal('adminAuthModal');
-                openModal('adminModal');
-                showAlert("Accès Admin accordé");
-                input.value = "";
-            } else {
-                showAlert("Code incorrect");
-                input.value = "";
-            }
-        };
+        // Firebase Setup
+        try {
+            if (typeof __firebase_config !== 'undefined') {
+                const config = JSON.parse(__firebase_config);
+                const app = initializeApp(config);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+                const aid = typeof __app_id !== 'undefined' ? __app_id : 'khoud-7wayji-main';
 
-        // Firebase
-        const firebaseConfig = JSON.parse(__firebase_config);
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'khoud-7wayji-v3';
-
-        onAuthStateChanged(auth, (user) => {
-            if (!user) return signInAnonymously(auth);
-            initApp();
-        });
-
-        function initApp() {
-            const articlesRef = collection(db, 'artifacts', appId, 'public', 'data', 'articles');
-
-            // Soumission de l'article
-            document.getElementById('depositForm').onsubmit = async (e) => {
-                e.preventDefault();
-                try {
-                    // Simulation d'upload pour la démo
-                    await addDoc(articlesRef, {
-                        name: document.getElementById('itemName').value,
-                        imageUrl: 'https://images.unsplash.com/photo-1556905055-8f358a7a4bb4?q=80&w=400', 
-                        size: document.getElementById('itemSize').value,
-                        price: document.getElementById('itemPrice').value,
-                        status: 'en_attente',
-                        createdAt: new Date().toISOString()
-                    });
-                    showAlert("Demande envoyée !");
-                    closeModal('depositModal');
-                    e.target.reset();
-                    document.getElementById('fileNameDisplay').textContent = "Ajouter une image";
-                } catch (err) {
-                    showAlert("Erreur réseau");
-                }
-            };
-
-            // Écoute des données
-            onSnapshot(articlesRef, (snap) => {
-                const container = document.getElementById('galleryContainer');
-                const adminContainer = document.getElementById('adminContainer');
-                let all = [];
-                snap.forEach(d => all.push({ id: d.id, ...d.data() }));
-
-                // Galerie Publique (Seulement 'publie')
-                const published = all.filter(a => a.status === 'publie');
-                container.innerHTML = published.map(i => `
-                    <div class="group animate-in fade-in duration-700">
-                        <div class="aspect-[3/4] bg-gray-100 mb-4 overflow-hidden relative">
-                            <img src="${i.imageUrl}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                            <div class="absolute bottom-4 right-4 bg-white px-3 py-1 text-[8px] font-bold tracking-widest uppercase">${i.size}</div>
-                        </div>
-                        <h4 class="serif text-xl font-bold uppercase tracking-tighter">${i.name}</h4>
-                        <p class="text-[10px] font-bold mt-1 tracking-widest text-gray-400">${i.price} MAD</p>
-                    </div>
-                `).join('');
-                document.getElementById('dropCount').textContent = `${published.length} Pièces en ligne`;
-
-                // Espace Admin (Seulement 'en_attente')
-                const pending = all.filter(a => a.status === 'en_attente');
-                adminContainer.innerHTML = pending.map(i => `
-                    <div class="flex items-center justify-between p-5 border border-gray-100 bg-gray-50 rounded-sm">
-                        <div class="flex items-center gap-6">
-                            <img src="${i.imageUrl}" class="w-20 h-20 object-cover bg-white shadow-sm">
-                            <div>
-                                <p class="font-bold text-xs uppercase tracking-widest">${i.name}</p>
-                                <p class="text-[10px] text-gray-400 mt-1">TAILLE: ${i.size} • PRIX: ${i.price} MAD</p>
+                window.loadGallery = (filter = 'all') => {
+                    const q = query(collection(db, 'artifacts', aid, 'public', 'data', 'articles'));
+                    onSnapshot(q, (snap) => {
+                        const container = document.getElementById('galleryContainer');
+                        if(!container) return;
+                        let arts = [];
+                        snap.forEach(d => arts.push(d.data()));
+                        if(filter !== 'all') arts = arts.filter(a => a.category === filter);
+                        
+                        container.innerHTML = arts.length ? arts.map(i => `
+                            <div class="group cursor-pointer">
+                                <div class="aspect-[3/4] bg-gray-100 mb-4 overflow-hidden relative">
+                                    <img src="${i.imageUrl}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://api.placeholder.com/300/400?text=${i.name}'">
+                                    <div class="absolute bottom-4 right-4 bg-white px-3 py-1 text-[8px] font-bold tracking-widest uppercase">${i.size}</div>
+                                </div>
+                                <h4 class="serif text-xl font-bold">${i.name}</h4>
+                                <p class="text-[10px] font-bold mt-1 tracking-widest text-gray-400">${i.price} MAD</p>
                             </div>
-                        </div>
-                        <div class="flex gap-3">
-                            <button onclick="approveItem('${i.id}')" class="bg-black text-white px-6 py-2 text-[9px] font-bold uppercase tracking-widest hover:opacity-80 transition-all">Publier</button>
-                            <button onclick="deleteItem('${i.id}')" class="border border-red-200 text-red-500 px-6 py-2 text-[9px] font-bold uppercase tracking-widest hover:bg-red-50 transition-all">Rejeter</button>
-                        </div>
-                    </div>
-                `).join('') || '<div class="text-center py-20 opacity-30 italic text-sm">Aucune demande en attente.</div>';
-            });
+                        `).join('') : '<p class="col-span-full text-center opacity-30 italic py-12">Bientôt de nouvelles pépites...</p>';
+                        
+                        const cnt = document.getElementById('dropCount');
+                        if(cnt) cnt.textContent = arts.length + " Article(s)";
+                    });
+                };
 
-            // Actions Admin
-            window.approveItem = (id) => {
-                updateDoc(doc(articlesRef, id), { status: 'publie' });
-                showAlert("Article publié !");
-            };
-            
-            window.deleteItem = (id) => {
-                if(confirm("Supprimer définitivement cette demande ?")) {
-                    deleteDoc(doc(articlesRef, id));
-                    showAlert("Demande supprimée.");
-                }
-            };
-        }
+                onAuthStateChanged(auth, (u) => { if(u) window.loadGallery(); });
+                signInAnonymously(auth);
+            }
+        } catch(e) { console.warn("Mode déconnecté."); }
     </script>
 </body>
 </html>
