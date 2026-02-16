@@ -96,7 +96,28 @@
 
         .btn-black:hover { opacity: 0.9; }
 
-        /* File input styling */
+        .btn-outline {
+            background: transparent;
+            color: black;
+            border: 1px solid black;
+            width: 100%;
+            padding: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-outline:hover {
+            background: #f8f8f8;
+        }
+
         .file-upload-wrapper {
             border: 2px dashed #d1d1cf;
             padding: 30px 20px;
@@ -139,37 +160,38 @@
 </head>
 <body>
 
-    <!-- Navigation -->
+    <!-- Navigation Agrandie -->
     <nav class="sticky top-0 z-[100] bg-white border-b border-[#f0f0ed]">
         <div class="max-w-[1600px] mx-auto px-6 lg:px-16">
-            <div class="flex justify-between items-center h-24">
-                <!-- Logo avec le chemin spécifié -->
-                <div class="flex items-center space-x-6 cursor-pointer" onclick="location.reload()">
-                    <div class="w-12 h-12 border border-black flex items-center justify-center overflow-hidden bg-white">
+            <div class="flex justify-between items-center h-32"> <!-- Hauteur augmentée h-24 -> h-32 -->
+                <!-- Logo Agrandi -->
+                <div class="flex items-center space-x-8 cursor-pointer" onclick="location.reload()">
+                    <div class="w-16 h-16 border border-black flex items-center justify-center overflow-hidden bg-white">
                         <img src="assets/logo de la marque .jpg" alt="KHOUD-7WAYJI" class="w-full h-full object-cover" onerror="this.src='https://api.placeholder.com/100/100?text=KH'">
                     </div>
                     <div class="flex flex-col">
-                        <span class="serif text-2xl font-bold tracking-tighter uppercase">KHOUD-7WAYJI</span>
-                        <span class="text-[7px] tracking-[0.4em] uppercase opacity-50 font-bold">L-STYLE DYALEK</span>
+                        <span class="serif text-3xl font-bold tracking-tighter uppercase">KHOUD-7WAYJI</span>
+                        <span class="text-[8px] tracking-[0.5em] uppercase opacity-50 font-bold">L-STYLE DYALEK</span>
                     </div>
                 </div>
 
-                <div class="flex items-center space-x-4 md:space-x-8">
-                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-[10px] font-bold uppercase tracking-widest hover:opacity-50 hidden md:block">Accueil</button>
-                    <button onclick="openModal('loginModal')" class="text-[10px] font-bold uppercase tracking-widest hover:opacity-50">Connexion</button>
-                    <button onclick="openModal('signupModal')" class="text-[10px] font-bold uppercase tracking-widest border border-black px-6 py-3 hover:bg-black hover:text-white transition-all">S'inscrire</button>
+                <div class="flex items-center space-x-6 md:space-x-12">
+                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-[11px] font-bold uppercase tracking-widest hover:opacity-50 hidden md:block">Accueil</button>
+                    <button onclick="openModal('loginModal')" class="text-[11px] font-bold uppercase tracking-widest hover:opacity-50">Connexion</button>
+                    <!-- Barre d'inscription cliquable avec choix -->
+                    <button onclick="openModal('signupChoiceModal')" class="text-[11px] font-bold uppercase tracking-widest border-2 border-black px-8 py-4 hover:bg-black hover:text-white transition-all">S'inscrire</button>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero -->
-    <header class="pt-20 pb-12 px-8 text-center">
-        <h1 class="text-6xl md:text-[7rem] font-medium leading-[0.85] tracking-tighter mb-6">
+    <header class="pt-24 pb-16 px-8 text-center">
+        <h1 class="text-6xl md:text-[8rem] font-medium leading-[0.85] tracking-tighter mb-8">
             No cash?<br>
             <span class="italic font-light">No drama.</span>
         </h1>
-        <p class="serif text-xl italic text-gray-400">Khoud l-stlyle,flex l-vibe!</p>
+        <p class="serif text-2xl italic text-gray-400">Khoud l-stlyle, flex l-vibe!</p>
     </header>
 
     <!-- Casiers de Marché -->
@@ -209,20 +231,31 @@
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="py-20 border-t border-[#f0f0ed] text-center">
-        <div class="mb-8">
-            <p class="text-[9px] uppercase tracking-[0.4em] opacity-50 mb-4">Rejoignez la communauté</p>
-            <a href="https://www.instagram.com/khoud_7wayji/" target="_blank" class="inline-flex items-center space-x-3 group">
-                <div class="w-12 h-12 border border-black flex items-center justify-center group-hover:bg-black group-hover:text-white transition-all">
-                    <i class="fab fa-instagram text-xl"></i>
+    <!-- MODAL CHOIX INSCRIPTION -->
+    <div id="signupChoiceModal" class="modal">
+        <div class="modal-content text-center">
+            <button onclick="closeModal('signupChoiceModal')" class="absolute top-6 right-6 text-2xl hover:opacity-50">&times;</button>
+            <h2 class="serif text-4xl mb-6 italic">Rejoignez-nous</h2>
+            <p class="text-[10px] uppercase tracking-widest text-gray-400 mb-10">Choisissez votre mode d'inscription</p>
+            
+            <div class="space-y-4">
+                <button onclick="showAlert('Redirection vers Google...'); closeModal('signupChoiceModal');" class="btn-outline">
+                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18" alt="Google">
+                    Continuer avec Google
+                </button>
+                <div class="flex items-center py-4">
+                    <div class="flex-1 border-t border-gray-100"></div>
+                    <span class="px-4 text-[10px] uppercase text-gray-300 font-bold">Ou</span>
+                    <div class="flex-1 border-t border-gray-100"></div>
                 </div>
-                <span class="text-[11px] font-bold uppercase tracking-widest">@khoud_7wayji</span>
-            </a>
+                <button onclick="closeModal('signupChoiceModal'); openModal('signupModal');" class="btn-black">
+                    Créer un compte classique
+                </button>
+            </div>
         </div>
-    </footer>
+    </div>
 
-    <!-- MODAL DÉPÔT D'ARTICLE -->
+    <!-- MODAL DÉPÔT D'ARTICLE MODIFIÉ -->
     <div id="depositModal" class="modal">
         <div class="modal-content">
             <button onclick="closeModal('depositModal')" class="absolute top-6 right-6 text-2xl hover:opacity-50">&times;</button>
@@ -231,7 +264,6 @@
             
             <form id="depositForm" onsubmit="event.preventDefault(); showAlert('Merci ! Votre article est en cours de validation.'); closeModal('depositModal');">
                 
-                <!-- Zone de dépôt Photo -->
                 <div class="form-group">
                     <label class="form-label">Photo de l'article *</label>
                     <div class="file-upload-wrapper" onclick="document.getElementById('articlePhoto').click()">
@@ -244,6 +276,16 @@
                 <div class="form-group">
                     <label class="form-label">Nom de l'article *</label>
                     <input type="text" required class="input-classic" placeholder="Ex: T-shirt Oversize Noir">
+                </div>
+
+                <!-- Ajout de la Catégorie Homme / Femme -->
+                <div class="form-group">
+                    <label class="form-label">Catégorie *</label>
+                    <select required class="input-classic bg-white">
+                        <option value="" disabled selected>Choisir un vestiaire</option>
+                        <option value="homme">Homme</option>
+                        <option value="femme">Femme</option>
+                    </select>
                 </div>
 
                 <div class="grid grid-cols-2 gap-4">
@@ -286,7 +328,7 @@
         </div>
     </div>
 
-    <!-- MODAL INSCRIPTION -->
+    <!-- MODAL INSCRIPTION CLASSIQUE -->
     <div id="signupModal" class="modal">
         <div class="modal-content">
             <button onclick="closeModal('signupModal')" class="absolute top-6 right-6 text-2xl">&times;</button>
@@ -327,7 +369,6 @@
         import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, onSnapshot, query } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Fonctions globales
         window.openModal = (id) => {
             const m = document.getElementById(id);
             if(m) m.style.display = 'flex';
@@ -361,7 +402,7 @@
             if(window.loadGallery) window.loadGallery(cat);
         };
 
-        // Configuration Firebase
+        // Firebase Setup
         try {
             if (typeof __firebase_config !== 'undefined') {
                 const config = JSON.parse(__firebase_config);
@@ -398,9 +439,7 @@
                 onAuthStateChanged(auth, (u) => { if(u) window.loadGallery(); });
                 signInAnonymously(auth);
             }
-        } catch(e) { 
-            console.warn("Mode déconnecté."); 
-        }
+        } catch(e) { console.warn("Mode déconnecté."); }
     </script>
 </body>
 </html>
