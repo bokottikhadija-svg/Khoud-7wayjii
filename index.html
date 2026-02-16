@@ -1,1 +1,371 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khoud-7wayji | Boutique d'Échange & Seconde Main</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Inter:wght@300;400;600;800&display=swap');
+        
+        :root {
+            --balna-bg: #fdfdfb;
+            --balna-accent: #0d0d0d;
+            --balna-border: #e8e8e3;
+        }
 
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--balna-bg);
+            color: var(--balna-accent);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .serif {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.98);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-black {
+            background: var(--balna-accent);
+            color: white;
+            padding: 1.25rem 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            font-size: 10px;
+            font-weight: 700;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            border: 1px solid var(--balna-accent);
+            cursor: pointer;
+        }
+
+        .btn-black:hover {
+            background: transparent;
+            color: var(--balna-accent);
+            transform: translateY(-2px);
+        }
+
+        .btn-home {
+            background: transparent;
+            border: 2px solid var(--balna-accent);
+            padding: 0.8rem 2rem;
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        .btn-home:hover {
+            background: var(--balna-accent);
+            color: white;
+        }
+
+        /* Styles pour les nouveaux casiers de marché */
+        .market-locker {
+            height: 65vh;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .market-locker img {
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .market-locker:hover img {
+            transform: scale(1.08);
+        }
+
+        .locker-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+            transition: background 0.4s ease;
+        }
+
+        .market-locker:hover .locker-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+        }
+
+        .input-balna {
+            border-bottom: 1px solid var(--balna-border);
+            padding: 1rem 0;
+            width: 100%;
+            outline: none;
+            background: transparent;
+        }
+
+        .product-card {
+            border: 1px solid var(--balna-border);
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        #loader {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: #000;
+            z-index: 9999;
+            animation: loading 2s infinite linear;
+        }
+
+        @keyframes loading {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loader"></div>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#f0f0ed]">
+        <div class="max-w-[1600px] mx-auto px-8 lg:px-16">
+            <div class="flex justify-between items-center h-28">
+                
+                <!-- LOGO ET NOM A GAUCHE -->
+                <div class="flex items-center space-x-6">
+                    <div class="w-16 h-16 border border-black flex items-center justify-center overflow-hidden bg-white shadow-sm">
+                        <img src="assets/logo de la marque .jpg" alt="Logo Khoud-7wayji" class="w-full h-full object-cover" onerror="this.src='https://api.placeholder.com/100/100?text=KH'">
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="serif text-3xl font-bold tracking-tighter leading-none">KHOUD-7WAYJI</span>
+                        <span class="text-[7px] tracking-[0.4em] uppercase opacity-50 mt-1">Archive & Seconde Main</span>
+                    </div>
+                </div>
+
+                <!-- ACTIONS A DROITE -->
+                <div class="flex items-center space-x-6">
+                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="btn-home">
+                        ACCUEIL
+                    </button>
+                    <button id="authBtn" onclick="openModal('signupModal')" class="btn-black">S'inscrire</button>
+                    <div id="userBadge" class="hidden text-[10px] font-bold uppercase tracking-widest border border-black px-4 py-2">Membre</div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="pt-20 pb-12 px-8 text-center">
+        <h1 class="text-7xl md:text-[9rem] font-medium leading-[0.85] tracking-tighter mb-6">
+            No cash?<br>
+            <span class="italic font-light">No drama.</span>
+        </h1>
+        <p class="serif text-2xl italic text-gray-400">"Khoud l-style, flex l-vibe"</p>
+    </header>
+
+    <!-- SECTION CASIERS DE MARCHÉ -->
+    <section class="max-w-[1600px] mx-auto px-8 lg:px-16 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Casier Homme -->
+            <div class="market-locker group" onclick="showAlert('Exploration du catalogue Hommes...')">
+                <img src="https://images.unsplash.com/photo-1488161628813-04466f872be2?auto=format&fit=crop&q=80&w=1200" alt="Style Homme" class="w-full h-full object-cover">
+                <div class="locker-overlay absolute inset-0 flex flex-col justify-end p-12 text-white">
+                    <span class="text-[10px] uppercase tracking-[0.5em] font-bold mb-4 opacity-70 group-hover:opacity-100 transition-opacity">Archive Masculine</span>
+                    <h2 class="serif text-6xl italic">Hommes</h2>
+                    <div class="mt-6 w-12 h-[1px] bg-white group-hover:w-full transition-all duration-700"></div>
+                </div>
+            </div>
+
+            <!-- Casier Femme -->
+            <div class="market-locker group" onclick="showAlert('Exploration du catalogue Femmes...')">
+                <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=1200" alt="Style Femme" class="w-full h-full object-cover">
+                <div class="locker-overlay absolute inset-0 flex flex-col justify-end p-12 text-white">
+                    <span class="text-[10px] uppercase tracking-[0.5em] font-bold mb-4 opacity-70 group-hover:opacity-100 transition-opacity">Archive Féminine</span>
+                    <h2 class="serif text-6xl italic">Femmes</h2>
+                    <div class="mt-6 w-12 h-[1px] bg-white group-hover:w-full transition-all duration-700"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galerie -->
+    <main class="max-w-[1600px] mx-auto px-8 lg:px-16 py-12">
+        <div class="flex justify-between items-end mb-16 border-b border-gray-100 pb-12">
+            <h3 class="serif text-5xl italic">Articles Récents</h3>
+            <div id="dropCount" class="text-[10px] uppercase tracking-widest font-bold">Initialisation...</div>
+        </div>
+
+        <div id="galleryContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+             <div class="col-span-full py-20 text-center border border-dashed border-gray-200">
+                <p class="serif text-2xl italic text-gray-300">Connexion à l'archive en cours...</p>
+             </div>
+        </div>
+
+        <!-- BOUTONS BAS -->
+        <div class="mt-20 flex flex-col items-center space-y-10">
+            <button onclick="openModal('profileModal')" class="btn-black">Déposer un article</button>
+            
+            <a href="https://www.instagram.com/khoud_7wayji/" target="_blank" class="flex items-center space-x-6 px-12 py-6 bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-full hover:scale-105 transition-transform shadow-2xl">
+                <i class="fab fa-instagram text-3xl"></i>
+                <span class="font-black tracking-[0.2em] uppercase text-lg">SUIVEZ-NOUS SUR INSTAGRAM</span>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-20 border-t border-gray-100 mt-20 text-center">
+        <span class="text-[10px] uppercase tracking-[0.3em] font-bold">Khoud-7wayji © 2024</span>
+        <div id="userIdDisplay" class="text-gray-300 text-[8px] mt-4"></div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="profileModal" class="modal flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-4xl p-12 shadow-2xl relative border border-gray-100">
+            <button onclick="closeModal('profileModal')" class="absolute top-8 right-8 text-3xl">&times;</button>
+            <h3 class="serif text-5xl mb-8 italic">Vendre un article</h3>
+            <div class="space-y-8">
+                <input type="text" id="itemName" placeholder="Nom de l'article" class="input-balna">
+                <input type="number" id="itemPrice" placeholder="Prix (MAD)" class="input-balna">
+                <button onclick="handleDeposit()" class="btn-black w-full">Confirmer</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="signupModal" class="modal flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-xl p-12 shadow-2xl relative border border-gray-100">
+            <button onclick="closeModal('signupModal')" class="absolute top-8 right-8 text-3xl">&times;</button>
+            <h2 class="serif text-5xl mb-8 italic">S'inscrire</h2>
+            <form onsubmit="handleRegistration(event)" class="space-y-8">
+                <input type="text" id="regName" placeholder="Nom Complet" required class="input-balna">
+                <input type="email" id="regEmail" placeholder="Email" required class="input-balna">
+                <button type="submit" class="btn-black w-full">Créer mon profil</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="alertBox" class="fixed bottom-10 left-1/2 -translate-x-1/2 z-[2000] opacity-0 transition-all duration-500 translate-y-8 pointer-events-none">
+        <div class="bg-black text-white px-10 py-4 shadow-2xl">
+            <span id="alertMessage" class="text-[10px] uppercase tracking-widest font-bold"></span>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, query, onSnapshot, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const firebaseConfig = JSON.parse(__firebase_config);
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'khoud-7wayji-main';
+
+        let currentUser = null;
+        let unsubscribe = null;
+
+        const startGallery = (user) => {
+            if (!user) return;
+            if (unsubscribe) unsubscribe();
+
+            const q = query(collection(db, 'artifacts', appId, 'public', 'data', 'articles'));
+            unsubscribe = onSnapshot(q, (snapshot) => {
+                const container = document.getElementById('galleryContainer');
+                const countDisplay = document.getElementById('dropCount');
+                
+                if (snapshot.empty) {
+                    container.innerHTML = `<div class="col-span-full py-20 text-center border border-dashed border-gray-200">
+                        <p class="serif text-2xl italic text-gray-300">L'archive est vide pour le moment.</p>
+                    </div>`;
+                    countDisplay.textContent = "0 Article";
+                    return;
+                }
+
+                let html = '';
+                snapshot.forEach(doc => {
+                    const item = doc.data();
+                    html += `
+                        <div class="product-card group bg-white">
+                            <div class="aspect-square bg-gray-50 mb-4 overflow-hidden">
+                                <img src="${item.imageUrl || 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=500'}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                            <h4 class="serif text-xl font-bold">${item.name}</h4>
+                            <p class="text-xs font-bold mt-2">${item.price} MAD</p>
+                        </div>
+                    `;
+                });
+                container.innerHTML = html;
+                countDisplay.textContent = `${snapshot.size} Articles`;
+            }, (error) => {
+                console.error("Erreur Firestore:", error);
+            });
+        };
+
+        const init = async () => {
+            if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                await signInWithCustomToken(auth, __initial_auth_token);
+            } else {
+                await signInAnonymously(auth);
+            }
+        };
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                currentUser = user;
+                document.getElementById('userIdDisplay').textContent = `Session: ${user.uid}`;
+                startGallery(user);
+            }
+        });
+
+        init();
+
+        window.handleRegistration = async (e) => {
+            e.preventDefault();
+            if (!currentUser) return;
+            const name = document.getElementById('regName').value;
+            setLoading(true);
+            try {
+                await setDoc(doc(db, 'artifacts', appId, 'users', currentUser.uid, 'profile', 'info'), {
+                    name, createdAt: serverTimestamp()
+                });
+                showAlert("Bienvenue dans l'archive !");
+                document.getElementById('authBtn').style.display = 'none';
+                document.getElementById('userBadge').classList.remove('hidden');
+                closeModal('signupModal');
+            } catch (err) { showAlert("Erreur d'inscription"); }
+            setLoading(false);
+        };
+
+        window.handleDeposit = async () => {
+            if (!currentUser) { showAlert("Inscrivez-vous d'abord"); return; }
+            const name = document.getElementById('itemName').value;
+            const price = document.getElementById('itemPrice').value;
+            if (!name || !price) { showAlert("Champs requis"); return; }
+            setLoading(true);
+            try {
+                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'articles'), {
+                    name, price: parseFloat(price), sellerId: currentUser.uid,
+                    createdAt: serverTimestamp(), imageUrl: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=500'
+                });
+                showAlert("Article publié !");
+                closeModal('profileModal');
+            } catch (err) { showAlert("Erreur de publication"); }
+            setLoading(false);
+        };
+
+        window.openModal = (id) => document.getElementById(id).style.display = 'flex';
+        window.closeModal = (id) => document.getElementById(id).style.display = 'none';
+        window.setLoading = (s) => document.getElementById('loader').style.display = s ? 'block' : 'none';
+        window.showAlert = (m) => {
+            const b = document.getElementById('alertBox');
+            document.getElementById('alertMessage').textContent = m;
+            b.classList.remove('opacity-0', 'translate-y-8');
+            setTimeout(() => b.classList.add('opacity-0', 'translate-y-8'), 3000);
+        };
+    </script>
+</body>
+</html>
