@@ -1,396 +1,190 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Khoud-7wayji | Boutique d'Échange & Seconde Main</title>
+    <title>Khadija's Phone | L'élégance redéfinie</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Inter:wght@300;400;600;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
         
-        :root {
-            --balna-bg: #fdfdfb;
-            --balna-accent: #0d0d0d;
-            --balna-border: #e8e8e3;
-        }
-
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--balna-bg);
-            color: var(--balna-accent);
-            margin: 0;
-            padding: 0;
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
         }
 
-        h1, h2, h3, .serif {
-            font-family: 'Cormorant Garamond', serif;
+        .apple-gradient {
+            background: linear-gradient(180deg, #ffffff 0%, #a1a1a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        /* Amélioration de la gestion des modaux */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.95);
-            z-index: 9999;
-            backdrop-filter: blur(8px);
-            overflow-y: auto;
+        .hero-video-container {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle, #1a1a1a 0%, #000 100%);
         }
 
-        .btn-black {
-            background: var(--balna-accent);
+        .glass-nav {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-card {
+            background: #161617;
+            border-radius: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: scale(1.02);
+        }
+
+        .btn-apple {
+            background: #0071e3;
             color: white;
-            padding: 1.25rem 2.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.3em;
-            font-size: 10px;
-            font-weight: 700;
-            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-            border: 1px solid var(--balna-accent);
-            cursor: pointer;
+            padding: 12px 24px;
+            border-radius: 980px;
+            font-weight: 600;
+            transition: background 0.3s;
         }
 
-        .btn-black:hover {
-            background: transparent;
-            color: var(--balna-accent);
-            transform: translateY(-2px);
+        .btn-apple:hover {
+            background: #0077ed;
         }
 
-        .btn-home {
-            background: transparent;
-            border: 2px solid var(--balna-accent);
-            padding: 0.8rem 2rem;
-            font-size: 14px;
-            font-weight: 800;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-        }
-        .btn-home:hover {
-            background: var(--balna-accent);
-            color: white;
+        .floating-phone {
+            animation: float 6s ease-in-out infinite;
         }
 
-        .market-locker {
-            height: 65vh;
-            overflow: hidden;
-            position: relative;
-            cursor: pointer;
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .market-locker img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .market-locker:hover img {
-            transform: scale(1.08);
-        }
-
-        .locker-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
-            transition: background 0.4s ease;
-        }
-
-        .market-locker:hover .locker-overlay {
-            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
-        }
-
-        .input-balna {
-            border-bottom: 1px solid var(--balna-border);
-            padding: 1rem 0;
-            width: 100%;
-            outline: none;
-            background: transparent;
-            font-size: 1rem;
-        }
-
-        .product-card {
-            border: 1px solid var(--balna-border);
-            padding: 1rem;
-            transition: all 0.3s ease;
-            background: white;
-        }
-
-        #loader {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 4px;
-            background: #000;
-            z-index: 10000;
-            animation: loading 2s infinite linear;
-        }
-
-        @keyframes loading {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        /* Correction pour éviter le blocage du scroll */
-        body.modal-open {
-            overflow: hidden;
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
         }
     </style>
 </head>
 <body>
 
-    <div id="loader"></div>
-
     <!-- Navigation -->
-    <nav class="sticky top-0 z-[100] bg-white/95 backdrop-blur-md border-b border-[#f0f0ed]">
-        <div class="max-w-[1600px] mx-auto px-6 lg:px-16">
-            <div class="flex justify-between items-center h-24">
-                
-                <!-- LOGO ET NOM -->
-                <div class="flex items-center space-x-6">
-                    <div class="w-14 h-14 border border-black flex items-center justify-center overflow-hidden bg-white">
-                        <img src="assets/logo de la marque .jpg" alt="Logo Khoud-7wayji" class="w-full h-full object-cover" onerror="this.src='https://api.placeholder.com/100/100?text=KH'">
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="serif text-2xl md:text-3xl font-bold tracking-tighter leading-none">KHOUD-7WAYJI</span>
-                        <span class="text-[7px] tracking-[0.4em] uppercase opacity-50 mt-1">Archive & Seconde Main</span>
-                    </div>
-                </div>
-
-                <!-- ACTIONS -->
-                <div class="flex items-center space-x-4">
-                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="hidden md:block btn-home">
-                        ACCUEIL
-                    </button>
-                    <button id="authBtn" onclick="openModal('signupModal')" class="btn-black !py-3 !px-6 md:!py-5 md:!px-10">S'inscrire</button>
-                    <div id="userBadge" class="hidden text-[10px] font-bold uppercase tracking-widest border border-black px-4 py-2">Membre</div>
-                </div>
+    <nav class="glass-nav fixed w-full z-50 top-0">
+        <div class="max-w-6xl mx-auto px-6 h-12 flex items-center justify-between">
+            <div class="text-xl font-semibold tracking-tight tracking-widest uppercase">
+                Khadija's Phone
+            </div>
+            <div class="hidden md:flex space-x-8 text-xs font-light text-gray-300">
+                <a href="#store" class="hover:text-white transition">Boutique</a>
+                <a href="#iphone" class="hover:text-white transition">K-Phone 15</a>
+                <a href="#support" class="hover:text-white transition">Support</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <svg class="w-4 h-4 text-gray-300 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                <svg class="w-4 h-4 text-gray-300 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
             </div>
         </div>
     </nav>
 
-    <!-- En-tête (Hero) -->
-    <header class="pt-16 pb-12 px-8 text-center bg-white">
-        <h1 class="text-6xl md:text-[8rem] font-medium leading-[0.85] tracking-tighter mb-6">
-            No cash?<br>
-            <span class="italic font-light">No drama.</span>
+    <!-- Hero Section -->
+    <section class="hero-video-container pt-20 flex-col text-center px-4">
+        <h1 class="text-5xl md:text-7xl font-bold apple-gradient mb-4 animate__animated animate__fadeInUp">
+            K-Phone 15 Pro
         </h1>
-        <p class="serif text-xl md:text-2xl italic text-gray-400">"Khoud l-style, flex l-vibe"</p>
-    </header>
+        <p class="text-xl md:text-2xl font-light text-gray-400 mb-8 animate__animated animate__fadeInUp animate__delay-1s">
+            Forjé en titane. Conçu par Khadija.
+        </p>
+        <div class="flex space-x-6 animate__animated animate__fadeInUp animate__delay-1s">
+            <a href="#" class="btn-apple">Acheter</a>
+            <a href="#" class="text-blue-500 hover:underline flex items-center">
+                En savoir plus 
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </a>
+        </div>
 
-    <!-- Casiers de Marché -->
-    <section class="max-w-[1600px] mx-auto px-6 lg:px-16 py-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Hommes -->
-            <div class="market-locker group" onclick="showAlert('Exploration du catalogue Hommes...')">
-                <img src="https://images.unsplash.com/photo-1488161628813-04466f872be2?auto=format&fit=crop&q=80&w=1200" alt="Style Homme">
-                <div class="locker-overlay flex flex-col justify-end p-8 md:p-12 text-white">
-                    <span class="text-[10px] uppercase tracking-[0.5em] font-bold mb-4 opacity-70">Archive Masculine</span>
-                    <h2 class="serif text-5xl md:text-6xl italic">Hommes</h2>
-                    <div class="mt-6 w-12 h-[1px] bg-white group-hover:w-full transition-all duration-700"></div>
-                </div>
+        <div class="mt-12 floating-phone">
+            <!-- Remplacement par un SVG stylisé simulant un iPhone -->
+            <svg width="240" height="480" viewBox="0 0 240 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="5" y="5" width="230" height="470" rx="40" stroke="#333" stroke-width="10"/>
+                <rect x="15" y="15" width="210" height="450" rx="32" fill="#111"/>
+                <rect x="80" y="25" width="80" height="20" rx="10" fill="#000"/>
+                <path d="M40 100C40 100 100 150 200 100" stroke="url(#paint0_linear)" stroke-width="2" stroke-linecap="round"/>
+                <defs>
+                    <linearGradient id="paint0_linear" x1="40" y1="125" x2="200" y2="125" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#0071E3"/>
+                        <stop offset="1" stop-color="#C13584"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Grid Features -->
+    <section class="max-w-6xl mx-auto py-24 px-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="feature-card p-12 flex flex-col items-center text-center">
+            <h3 class="text-3xl font-semibold mb-4">Caméra K-Vision</h3>
+            <p class="text-gray-400 mb-8 max-w-sm">Capturez chaque détail avec le nouveau capteur de 48 Mpx. Vos souvenirs n'ont jamais été aussi réels.</p>
+            <div class="w-full h-48 bg-gray-800 rounded-2xl overflow-hidden relative">
+                <div class="absolute inset-0 flex items-center justify-center text-6xl opacity-20">📸</div>
             </div>
+        </div>
 
-            <!-- Femmes -->
-            <div class="market-locker group" onclick="showAlert('Exploration du catalogue Femmes...')">
-                <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=1200" alt="Style Femme">
-                <div class="locker-overlay flex flex-col justify-end p-8 md:p-12 text-white">
-                    <span class="text-[10px] uppercase tracking-[0.5em] font-bold mb-4 opacity-70">Archive Féminine</span>
-                    <h2 class="serif text-5xl md:text-6xl italic">Femmes</h2>
-                    <div class="mt-6 w-12 h-[1px] bg-white group-hover:w-full transition-all duration-700"></div>
-                </div>
+        <div class="feature-card p-12 flex flex-col items-center text-center">
+            <h3 class="text-3xl font-semibold mb-4">Puce K1-Bionic</h3>
+            <p class="text-gray-400 mb-8 max-w-sm">Le processeur le plus rapide jamais vu sur un smartphone de la gamme Khadija.</p>
+            <div class="w-full h-48 bg-gradient-to-br from-purple-900 to-black rounded-2xl flex items-center justify-center">
+                <span class="text-4xl font-bold tracking-widest">K1</span>
             </div>
         </div>
     </section>
 
-    <!-- Galerie des articles -->
-    <main class="max-w-[1600px] mx-auto px-6 lg:px-16 py-12">
-        <div class="flex justify-between items-end mb-12 border-b border-gray-100 pb-8">
-            <h3 class="serif text-4xl md:text-5xl italic">Articles Récents</h3>
-            <div id="dropCount" class="text-[10px] uppercase tracking-widest font-bold">Chargement...</div>
-        </div>
+    <!-- Full Width Highlight -->
+    <section class="bg-white text-black py-24 px-6 text-center">
+        <h2 class="text-5xl md:text-6xl font-bold mb-8">Un nouveau genre de puissance.</h2>
+        <p class="text-lg md:text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+            L'autonomie de la batterie a été optimisée pour durer toute la journée, même avec les applications les plus exigeantes.
+        </p>
+        <button class="bg-black text-white px-8 py-3 rounded-full font-semibold hover:bg-gray-800 transition">
+            Découvrir l'autonomie
+        </button>
+    </section>
 
-        <div id="galleryContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-             <!-- Injecté par JavaScript -->
-        </div>
-
-        <!-- Boutons d'Action -->
-        <div class="mt-20 flex flex-col items-center space-y-10">
-            <button onclick="openModal('profileModal')" class="btn-black">Déposer un article</button>
-            
-            <a href="https://www.instagram.com/khoud_7wayji/" target="_blank" class="flex items-center space-x-6 px-10 py-5 bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-full hover:scale-105 transition-transform shadow-xl">
-                <i class="fab fa-instagram text-2xl"></i>
-                <span class="font-bold tracking-[0.2em] uppercase text-sm md:text-base">SUIVEZ-NOUS SUR INSTAGRAM</span>
-            </a>
-        </div>
-    </main>
-
-    <!-- Pied de page -->
-    <footer class="py-16 border-t border-gray-100 mt-20 text-center">
-        <span class="text-[10px] uppercase tracking-[0.3em] font-bold">Khoud-7wayji © 2024</span>
-        <div id="userIdDisplay" class="text-gray-300 text-[8px] mt-4"></div>
-    </footer>
-
-    <!-- Modal: Vendre un article -->
-    <div id="profileModal" class="modal flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-2xl p-10 shadow-2xl relative border border-gray-100">
-            <button onclick="closeModal('profileModal')" class="absolute top-6 right-6 text-3xl hover:text-red-500 transition-colors">&times;</button>
-            <h3 class="serif text-4xl mb-8 italic text-center">Déposer un article</h3>
-            <div class="space-y-8">
-                <div>
-                    <label class="text-[9px] uppercase tracking-widest font-bold opacity-50">Nom de la pièce</label>
-                    <input type="text" id="itemName" placeholder="Ex: Veste Vintage 90s" class="input-balna">
-                </div>
-                <div>
-                    <label class="text-[9px] uppercase tracking-widest font-bold opacity-50">Prix souhaité (MAD)</label>
-                    <input type="number" id="itemPrice" placeholder="0.00" class="input-balna">
-                </div>
-                <button onclick="handleDeposit()" class="btn-black w-full">Confirmer le dépôt</button>
+    <!-- Footer -->
+    <footer class="bg-[#161617] py-12 px-6">
+        <div class="max-w-6xl mx-auto border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm">
+            <p>© 2024 Khadija's Phone. Tous droits réservés.</p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="#" class="hover:text-white transition">Confidentialité</a>
+                <a href="#" class="hover:text-white transition">Conditions</a>
+                <a href="#" class="hover:text-white transition">Ventes</a>
             </div>
         </div>
-    </div>
+    </footer>
 
-    <!-- Modal: Inscription -->
-    <div id="signupModal" class="modal flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-md p-10 shadow-2xl relative border border-gray-100">
-            <button onclick="closeModal('signupModal')" class="absolute top-6 right-6 text-3xl hover:text-red-500 transition-colors">&times;</button>
-            <h2 class="serif text-4xl mb-8 italic text-center">Rejoindre l'Archive</h2>
-            <form onsubmit="handleRegistration(event)" class="space-y-8">
-                <input type="text" id="regName" placeholder="Nom Complet" required class="input-balna">
-                <input type="email" id="regEmail" placeholder="Votre Email" required class="input-balna">
-                <button type="submit" class="btn-black w-full">Créer mon profil</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Notifications -->
-    <div id="alertBox" class="fixed bottom-10 left-1/2 -translate-x-1/2 z-[10000] opacity-0 transition-all duration-500 translate-y-8 pointer-events-none">
-        <div class="bg-black text-white px-8 py-4 shadow-2xl">
-            <span id="alertMessage" class="text-[10px] uppercase tracking-widest font-bold"></span>
-        </div>
-    </div>
-
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, query, onSnapshot, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        const firebaseConfig = JSON.parse(__firebase_config);
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'khoud-7wayji-main';
-
-        let currentUser = null;
-        let unsubscribe = null;
-
-        const startGallery = (user) => {
-            if (!user) return;
-            const q = query(collection(db, 'artifacts', appId, 'public', 'data', 'articles'));
-            unsubscribe = onSnapshot(q, (snapshot) => {
-                const container = document.getElementById('galleryContainer');
-                const countDisplay = document.getElementById('dropCount');
-                
-                if (snapshot.empty) {
-                    container.innerHTML = `<div class="col-span-full py-20 text-center border border-dashed border-gray-200">
-                        <p class="serif text-xl italic text-gray-300">Aucun article dans l'archive pour le moment.</p>
-                    </div>`;
-                    countDisplay.textContent = "0 ARTICLE";
-                    return;
+    <script>
+        // Simple scroll animation trigger
+        window.addEventListener('scroll', () => {
+            const cards = document.querySelectorAll('.feature-card');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
                 }
-
-                let html = '';
-                snapshot.forEach(doc => {
-                    const item = doc.data();
-                    html += `
-                        <div class="product-card group">
-                            <div class="aspect-[3/4] bg-gray-50 mb-4 overflow-hidden relative">
-                                <img src="${item.imageUrl || 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=500'}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                                <div class="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                            </div>
-                            <h4 class="serif text-xl font-bold">${item.name}</h4>
-                            <p class="text-xs font-bold mt-2 tracking-widest">${item.price} MAD</p>
-                        </div>
-                    `;
-                });
-                container.innerHTML = html;
-                countDisplay.textContent = `${snapshot.size} ${snapshot.size > 1 ? 'ARTICLES' : 'ARTICLE'}`;
-            }, (error) => console.error("Erreur d'accès:", error));
-        };
-
-        const initAuth = async () => {
-            try {
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
-                    await signInAnonymously(auth);
-                }
-            } catch (err) { console.error("Erreur Auth:", err); }
-        };
-
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                currentUser = user;
-                document.getElementById('userIdDisplay').textContent = `ID: ${user.uid}`;
-                startGallery(user);
-            }
+            });
         });
 
-        initAuth();
-
-        window.handleRegistration = async (e) => {
-            e.preventDefault();
-            if (!currentUser) return;
-            const name = document.getElementById('regName').value;
-            setLoading(true);
-            try {
-                await setDoc(doc(db, 'artifacts', appId, 'users', currentUser.uid, 'profile', 'info'), {
-                    name, createdAt: serverTimestamp()
-                });
-                showAlert("Profil créé avec succès !");
-                document.getElementById('authBtn').style.display = 'none';
-                document.getElementById('userBadge').classList.remove('hidden');
-                closeModal('signupModal');
-            } catch (err) { showAlert("Erreur lors de l'inscription"); }
-            setLoading(false);
-        };
-
-        window.handleDeposit = async () => {
-            if (!currentUser) { showAlert("Veuillez vous inscrire d'abord"); return; }
-            const name = document.getElementById('itemName').value;
-            const price = document.getElementById('itemPrice').value;
-            if (!name || !price) { showAlert("Champs requis"); return; }
-            setLoading(true);
-            try {
-                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'articles'), {
-                    name, price: parseFloat(price), sellerId: currentUser.uid,
-                    createdAt: serverTimestamp(), imageUrl: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=500'
-                });
-                showAlert("Article mis en vente !");
-                closeModal('profileModal');
-            } catch (err) { showAlert("Erreur de publication"); }
-            setLoading(false);
-        };
-
-        window.openModal = (id) => {
-            document.getElementById(id).style.display = 'flex';
-            document.body.classList.add('modal-open');
-        };
-        window.closeModal = (id) => {
-            document.getElementById(id).style.display = 'none';
-            document.body.classList.remove('modal-open');
-        };
-        window.setLoading = (s) => document.getElementById('loader').style.display = s ? 'block' : 'none';
-        window.showAlert = (m) => {
-            const b = document.getElementById('alertBox');
-            document.getElementById('alertMessage').textContent = m;
-            b.classList.remove('opacity-0', 'translate-y-8');
-            setTimeout(() => b.classList.add('opacity-0', 'translate-y-8'), 3000);
-        };
+        // Initialize cards state
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.8s ease-out';
+        });
     </script>
 </body>
 </html>
