@@ -25,7 +25,9 @@
             scroll-behavior: smooth;
         }
 
-        h1, h2, h3, .serif { font-family: 'Cormorant Garamond', serif; }
+        h1, h2, h3, .serif {
+            font-family: 'Cormorant Garamond', serif;
+        }
 
         .modal {
             display: none;
@@ -74,7 +76,9 @@
             transition: border-color 0.3s ease;
         }
 
-        .input-classic:focus { border-color: black; }
+        .input-classic:focus {
+            border-color: black;
+        }
 
         .btn-black {
             background: var(--balna-accent);
@@ -92,6 +96,28 @@
 
         .btn-black:hover { opacity: 0.9; }
 
+        .btn-outline {
+            background: transparent;
+            color: black;
+            border: 1px solid black;
+            width: 100%;
+            padding: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-outline:hover {
+            background: #f8f8f8;
+        }
+
         .file-upload-wrapper {
             border: 2px dashed #d1d1cf;
             padding: 30px 20px;
@@ -99,6 +125,10 @@
             cursor: pointer;
             transition: all 0.3s;
             background: #fafafa;
+        }
+        .file-upload-wrapper:hover {
+            background: #f0f0f0;
+            border-color: black;
         }
 
         .market-locker {
@@ -126,43 +156,19 @@
             justify-content: flex-end;
             padding: 2.5rem;
         }
-
-        /* WhatsApp Bar */
-        .whatsapp-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: #25D366;
-            color: white;
-            text-align: center;
-            padding: 12px;
-            font-size: 12px;
-            font-weight: bold;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            text-decoration: none;
-            transition: transform 0.3s ease;
-        }
-
-        .whatsapp-bar:hover { background: #1eb954; }
-        
-        body { padding-bottom: 50px; } /* Pour ne pas cacher le contenu sous la barre */
     </style>
 </head>
 <body>
 
-    <!-- Navigation -->
+    <!-- Navigation Agrandie -->
     <nav class="sticky top-0 z-[100] bg-white border-b border-[#f0f0ed]">
         <div class="max-w-[1600px] mx-auto px-6 lg:px-16">
             <div class="flex justify-between items-center h-32">
+                <!-- Logo Agrandi -->
                 <div class="flex items-center space-x-8 cursor-pointer" onclick="location.reload()">
-                    <div class="w-16 h-16 border border-black flex items-center justify-center overflow-hidden bg-white text-xs font-bold">KH</div>
+                    <div class="w-16 h-16 border border-black flex items-center justify-center overflow-hidden bg-white">
+                        <img src="assets/logo de la marque .jpg" alt="KHOUD-7WAYJI" class="w-full h-full object-cover" onerror="this.src='https://api.placeholder.com/100/100?text=KH'">
+                    </div>
                     <div class="flex flex-col">
                         <span class="serif text-3xl font-bold tracking-tighter uppercase">KHOUD-7WAYJI</span>
                         <span class="text-[8px] tracking-[0.5em] uppercase opacity-50 font-bold">L-STYLE DYALEK</span>
@@ -170,10 +176,15 @@
                 </div>
 
                 <div class="flex items-center space-x-6 md:space-x-12">
-                    <div id="userDisplay" class="hidden text-[10px] font-bold uppercase tracking-widest opacity-60"></div>
-                    <button id="loginBtn" onclick="openModal('loginModal')" class="text-[11px] font-bold uppercase tracking-widest hover:opacity-50">Connexion</button>
-                    <button id="signupBtn" onclick="openModal('signupModal')" class="text-[11px] font-bold uppercase tracking-widest border-2 border-black px-8 py-4 hover:bg-black hover:text-white transition-all">S'inscrire</button>
-                    <button id="logoutBtn" onclick="handleLogout()" class="hidden text-[11px] font-bold uppercase tracking-widest text-red-500">Déconnexion</button>
+                    <!-- Bouton Instagram Ajouté -->
+                    <a href="https://www.instagram.com/khoud_7wayji/" target="_blank" class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest hover:opacity-50">
+                        <i class="fa-brands fa-instagram text-lg"></i>
+                        <span class="hidden lg:inline">Instagram</span>
+                    </a>
+                    
+                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-[11px] font-bold uppercase tracking-widest hover:opacity-50 hidden md:block">Accueil</button>
+                    <button onclick="openModal('loginModal')" class="text-[11px] font-bold uppercase tracking-widest hover:opacity-50">Connexion</button>
+                    <button onclick="openModal('signupChoiceModal')" class="text-[11px] font-bold uppercase tracking-widest border-2 border-black px-8 py-4 hover:bg-black hover:text-white transition-all">S'inscrire</button>
                 </div>
             </div>
         </div>
@@ -188,7 +199,7 @@
         <p class="serif text-2xl italic text-gray-400">Khoud l-stlyle, flex l-vibe!</p>
     </header>
 
-    <!-- Casiers -->
+    <!-- Casiers de Marché -->
     <section class="max-w-[1400px] mx-auto px-6 py-12">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="market-locker group" onclick="filterGallery('homme')">
@@ -198,6 +209,7 @@
                     <p class="text-[9px] uppercase tracking-widest mt-2">Explorer le vestiaire</p>
                 </div>
             </div>
+
             <div class="market-locker group" onclick="filterGallery('femme')">
                 <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&q=80&w=1200" alt="Femmes">
                 <div class="locker-overlay text-white">
@@ -211,59 +223,92 @@
     <!-- Galerie -->
     <main id="market-section" class="max-w-[1400px] mx-auto px-6 py-12 border-t border-gray-100 mt-12">
         <div class="flex justify-between items-end mb-12">
-            <h3 id="galleryTitle" class="serif text-4xl italic text-black">Dernières pépites</h3>
+            <h3 id="galleryTitle" class="serif text-4xl italic">Dernières pépites</h3>
             <div id="dropCount" class="text-[10px] uppercase tracking-widest font-bold">0 Article</div>
         </div>
-        <div id="galleryContainer" class="grid grid-cols-2 lg:grid-cols-4 gap-8"></div>
+        
+        <div id="galleryContainer" class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Articles injectés via JS -->
+        </div>
 
         <div class="mt-20 flex flex-col items-center">
-            <button onclick="checkAuthAndOpenDeposit()" class="bg-black text-white px-12 py-5 text-[11px] font-bold uppercase tracking-[0.3em] hover:opacity-80 transition-all shadow-xl">Vendre un article</button>
-            <p class="text-[9px] text-gray-400 mt-4 uppercase tracking-widest">* Inscription requise pour vendre</p>
+            <button onclick="openModal('depositModal')" class="bg-black text-white px-12 py-5 text-[11px] font-bold uppercase tracking-[0.3em] hover:opacity-80 transition-all cursor-pointer shadow-xl">Déposer un article</button>
         </div>
     </main>
 
-    <!-- MODAL DÉPÔT (AVEC COMMISSION) -->
+    <!-- MODAL CHOIX INSCRIPTION -->
+    <div id="signupChoiceModal" class="modal">
+        <div class="modal-content text-center">
+            <button onclick="closeModal('signupChoiceModal')" class="absolute top-6 right-6 text-2xl hover:opacity-50">&times;</button>
+            <h2 class="serif text-4xl mb-6 italic">Rejoignez-nous</h2>
+            <p class="text-[10px] uppercase tracking-widest text-gray-400 mb-10">Choisissez votre mode d'inscription</p>
+            
+            <div class="space-y-4">
+                <button onclick="showAlert('Redirection vers Google...'); closeModal('signupChoiceModal');" class="btn-outline">
+                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18" alt="Google">
+                    Continuer avec Google
+                </button>
+                <div class="flex items-center py-4">
+                    <div class="flex-1 border-t border-gray-100"></div>
+                    <span class="px-4 text-[10px] uppercase text-gray-300 font-bold">Ou</span>
+                    <div class="flex-1 border-t border-gray-100"></div>
+                </div>
+                <button onclick="closeModal('signupChoiceModal'); openModal('signupModal');" class="btn-black">
+                    Créer un compte classique
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DÉPÔT D'ARTICLE -->
     <div id="depositModal" class="modal">
         <div class="modal-content">
-            <button onclick="closeModal('depositModal')" class="absolute top-6 right-6 text-2xl">&times;</button>
-            <h2 class="serif text-4xl mb-4 italic">Vendre un article</h2>
-            <div class="bg-amber-50 border border-amber-100 p-4 mb-6">
-                <p class="text-[10px] text-amber-800 font-bold uppercase leading-relaxed">
-                    Note : Une commission de 7% sera ajoutée au prix final pour couvrir les frais de service.
-                </p>
-            </div>
+            <button onclick="closeModal('depositModal')" class="absolute top-6 right-6 text-2xl hover:opacity-50">&times;</button>
+            <h2 class="serif text-4xl mb-4 italic">Nouvel article</h2>
+            <p class="text-[10px] uppercase tracking-widest text-gray-400 mb-8">Partagez votre pièce avec nous</p>
             
-            <form id="depositForm">
+            <form id="depositForm" onsubmit="event.preventDefault(); showAlert('Merci ! Votre article est en cours de validation.'); closeModal('depositModal');">
+                
                 <div class="form-group">
                     <label class="form-label">Photo de l'article *</label>
                     <div class="file-upload-wrapper" onclick="document.getElementById('articlePhoto').click()">
-                        <p id="fileNameDisplay" class="text-[10px] uppercase tracking-widest font-bold">Cliquer pour choisir</p>
+                        <i class="fa fa-plus-circle mb-2 text-2xl opacity-40"></i>
+                        <p id="fileNameDisplay" class="text-[10px] uppercase tracking-widest font-bold">Cliquer pour joindre une image</p>
                         <input type="file" id="articlePhoto" accept="image/*" class="hidden" required onchange="document.getElementById('fileNameDisplay').textContent = this.files[0].name">
                     </div>
                 </div>
+
                 <div class="form-group">
-                    <label class="form-label">Nom de l'article</label>
-                    <input type="text" id="itemName" required class="input-classic">
+                    <label class="form-label">Nom de l'article *</label>
+                    <input type="text" required class="input-classic" placeholder="Ex: T-shirt Oversize Noir">
                 </div>
+
+                <div class="form-group">
+                    <label class="form-label">Catégorie *</label>
+                    <select required class="input-classic bg-white">
+                        <option value="" disabled selected>Choisir un vestiaire</option>
+                        <option value="homme">Homme</option>
+                        <option value="femme">Femme</option>
+                    </select>
+                </div>
+
                 <div class="grid grid-cols-2 gap-4">
                     <div class="form-group">
-                        <label class="form-label">Catégorie</label>
-                        <select id="itemCat" required class="input-classic bg-white">
-                            <option value="homme">Homme</option>
-                            <option value="femme">Femme</option>
-                        </select>
+                        <label class="form-label">Taille *</label>
+                        <input type="text" required class="input-classic" placeholder="L / XL / 42">
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Taille</label>
-                        <input type="text" id="itemSize" required class="input-classic">
+                        <label class="form-label">Prix souhaité (MAD) *</label>
+                        <input type="number" required class="input-classic" placeholder="0">
                     </div>
                 </div>
+
                 <div class="form-group">
-                    <label class="form-label">Prix net vendeur (MAD)</label>
-                    <input type="number" id="itemPrice" required class="input-classic" oninput="updatePricePreview(this.value)">
-                    <p id="pricePreview" class="text-[9px] mt-2 font-bold text-gray-400 uppercase italic">Prix final affiché : 0 MAD</p>
+                    <label class="form-label">Description détaillée *</label>
+                    <textarea required class="input-classic h-24 resize-none" placeholder="État (neuf, porté), marque, couleur..."></textarea>
                 </div>
-                <button type="submit" class="btn-black">Publier mon article</button>
+
+                <button type="submit" class="btn-black">Soumettre à l'équipe</button>
             </form>
         </div>
     </div>
@@ -272,188 +317,133 @@
     <div id="loginModal" class="modal">
         <div class="modal-content">
             <button onclick="closeModal('loginModal')" class="absolute top-6 right-6 text-2xl">&times;</button>
-            <h2 class="serif text-4xl mb-8 italic">Connexion</h2>
-            <form id="loginForm">
-                <div class="form-group"><label class="form-label">Email</label><input type="email" id="loginEmail" required class="input-classic"></div>
-                <div class="form-group"><label class="form-label">Mot de passe</label><input type="password" id="loginPass" required class="input-classic"></div>
+            <h2 class="serif text-4xl mb-10 italic">Se connecter</h2>
+            <form onsubmit="event.preventDefault(); showAlert('Bienvenue !'); closeModal('loginModal');">
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" required class="input-classic">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mot de passe</label>
+                    <input type="password" required class="input-classic">
+                </div>
                 <button type="submit" class="btn-black">Entrer</button>
             </form>
         </div>
     </div>
 
-    <!-- MODAL INSCRIPTION -->
+    <!-- MODAL INSCRIPTION CLASSIQUE -->
     <div id="signupModal" class="modal">
         <div class="modal-content">
             <button onclick="closeModal('signupModal')" class="absolute top-6 right-6 text-2xl">&times;</button>
-            <h2 class="serif text-4xl mb-8 italic">Inscription</h2>
-            <form id="signupForm">
-                <div class="form-group"><label class="form-label">Email</label><input type="email" id="regEmail" required class="input-classic"></div>
-                <div class="form-group"><label class="form-label">Nom complet</label><input type="text" id="regName" required class="input-classic"></div>
-                <div class="form-group"><label class="form-label">Mot de passe</label><input type="password" id="regPass" required class="input-classic"></div>
-                <button type="submit" class="btn-black">Créer mon compte</button>
+            <h2 class="serif text-4xl mb-10 italic">S'inscrire</h2>
+            <form onsubmit="event.preventDefault(); showAlert('Compte créé avec succès !'); closeModal('signupModal');">
+                <div class="form-group">
+                    <label class="form-label">Email *</label>
+                    <input type="email" required class="input-classic">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="form-group">
+                        <label class="form-label">Prénom</label>
+                        <input type="text" class="input-classic">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Nom</label>
+                        <input type="text" class="input-classic">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mot de passe *</label>
+                    <input type="password" required class="input-classic">
+                </div>
+                <button type="submit" class="btn-black">Rejoindre la communauté</button>
             </form>
         </div>
     </div>
 
     <!-- Notifications -->
-    <div id="alertBox" class="fixed bottom-20 left-1/2 -translate-x-1/2 z-[15000] opacity-0 transition-all duration-500 pointer-events-none">
+    <div id="alertBox" class="fixed bottom-10 left-1/2 -translate-x-1/2 z-[15000] opacity-0 transition-all duration-500 pointer-events-none">
         <div class="bg-black text-white px-8 py-4 shadow-2xl text-[10px] font-bold uppercase tracking-widest">
             <span id="alertMessage"></span>
         </div>
     </div>
 
-    <!-- WhatsApp Contact Bar -->
-    <a href="https://wa.me/212773515753" target="_blank" class="whatsapp-bar">
-        <i class="fa-brands fa-whatsapp text-xl"></i>
-        CONTACTEZ-NOUS SUR WHATSAPP : 0773515753
-    </a>
-
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, onSnapshot, query } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // CONFIGURATION
-        const ADMIN_EMAIL = "bokottikhadija@gmail.com";
-        const COMMISSION_RATE = 0.07;
+        window.openModal = (id) => {
+            const m = document.getElementById(id);
+            if(m) m.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        };
         
-        const firebaseConfig = JSON.parse(__firebase_config);
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        const aid = typeof __app_id !== 'undefined' ? __app_id : 'khoud-7wayji-main';
+        window.closeModal = (id) => {
+            const m = document.getElementById(id);
+            if(m) m.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        };
 
-        let currentUser = null;
-
-        // UI HELPERS
-        window.openModal = (id) => { document.getElementById(id).style.display = 'flex'; };
-        window.closeModal = (id) => { document.getElementById(id).style.display = 'none'; };
         window.showAlert = (msg) => {
             const box = document.getElementById('alertBox');
-            document.getElementById('alertMessage').textContent = msg;
-            box.classList.remove('opacity-0');
-            setTimeout(() => box.classList.add('opacity-0'), 3000);
-        };
-
-        window.updatePricePreview = (val) => {
-            const price = parseFloat(val) || 0;
-            const final = Math.ceil(price * (1 + COMMISSION_RATE));
-            document.getElementById('pricePreview').textContent = `Prix final affiché : ${final} MAD`;
-        };
-
-        window.checkAuthAndOpenDeposit = () => {
-            if (!currentUser) {
-                showAlert("Veuillez vous inscrire ou vous connecter d'abord !");
-                openModal('signupModal');
-            } else {
-                openModal('depositModal');
+            const txt = document.getElementById('alertMessage');
+            if(txt) txt.textContent = msg;
+            if(box) {
+                box.classList.remove('opacity-0');
+                box.classList.add('bottom-12');
+                setTimeout(() => {
+                    box.classList.add('opacity-0');
+                    box.classList.remove('bottom-12');
+                }, 3000);
             }
-        };
-
-        // AUTHENTIFICATION
-        document.getElementById('signupForm').onsubmit = async (e) => {
-            e.preventDefault();
-            try {
-                const user = await createUserWithEmailAndPassword(auth, document.getElementById('regEmail').value, document.getElementById('regPass').value);
-                showAlert("Compte créé avec succès !");
-                closeModal('signupModal');
-            } catch (err) { showAlert("Erreur : " + err.message); }
-        };
-
-        document.getElementById('loginForm').onsubmit = async (e) => {
-            e.preventDefault();
-            try {
-                await signInWithEmailAndPassword(auth, document.getElementById('loginEmail').value, document.getElementById('loginPass').value);
-                showAlert("Bienvenue !");
-                closeModal('loginModal');
-            } catch (err) { showAlert("Email ou mot de passe incorrect"); }
-        };
-
-        window.handleLogout = () => signOut(auth);
-
-        onAuthStateChanged(auth, (user) => {
-            currentUser = user;
-            const logBtn = document.getElementById('loginBtn');
-            const signBtn = document.getElementById('signupBtn');
-            const outBtn = document.getElementById('logoutBtn');
-            const userDisp = document.getElementById('userDisplay');
-
-            if (user) {
-                logBtn.classList.add('hidden');
-                signBtn.classList.add('hidden');
-                outBtn.classList.remove('hidden');
-                userDisp.classList.remove('hidden');
-                userDisp.textContent = user.email;
-            } else {
-                logBtn.classList.remove('hidden');
-                signBtn.classList.remove('hidden');
-                outBtn.classList.add('hidden');
-                userDisp.classList.add('hidden');
-            }
-        });
-
-        // GESTION DES ARTICLES
-        const articlesRef = collection(db, 'artifacts', aid, 'public', 'data', 'articles');
-
-        document.getElementById('depositForm').onsubmit = async (e) => {
-            e.preventDefault();
-            const priceNet = parseFloat(document.getElementById('itemPrice').value);
-            const priceFinal = Math.ceil(priceNet * (1 + COMMISSION_RATE));
-            const name = document.getElementById('itemName').value;
-
-            try {
-                await addDoc(articlesRef, {
-                    name: name,
-                    imageUrl: 'https://images.unsplash.com/photo-1556905055-8f358a7a4bb4?q=80&w=400', // Placeholder
-                    category: document.getElementById('itemCat').value,
-                    size: document.getElementById('itemSize').value,
-                    price: priceFinal,
-                    seller: currentUser.email,
-                    createdAt: new Date().toISOString()
-                });
-
-                // Simulation Notification Email (Webhook)
-                console.log(`Notification envoyée à ${ADMIN_EMAIL} : Nouvel article "${name}" publié par ${currentUser.email}`);
-                
-                showAlert("Article publié avec succès !");
-                closeModal('depositModal');
-                e.target.reset();
-            } catch (err) {
-                showAlert("Erreur lors de la publication");
-            }
-        };
-
-        // CHARGEMENT GALERIE
-        window.loadGallery = (filter = 'all') => {
-            const q = query(articlesRef, orderBy('createdAt', 'desc'));
-            onSnapshot(q, (snap) => {
-                const container = document.getElementById('galleryContainer');
-                let articles = [];
-                snap.forEach(d => articles.push(d.data()));
-                
-                if (filter !== 'all') articles = articles.filter(a => a.category === filter);
-
-                container.innerHTML = articles.map(i => `
-                    <div class="group animate-in fade-in duration-700">
-                        <div class="aspect-[3/4] bg-gray-100 mb-4 overflow-hidden relative">
-                            <img src="${i.imageUrl}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                            <div class="absolute bottom-4 right-4 bg-white px-3 py-1 text-[8px] font-bold tracking-widest uppercase">${i.size}</div>
-                        </div>
-                        <h4 class="serif text-xl font-bold uppercase tracking-tighter">${i.name}</h4>
-                        <p class="text-[10px] font-bold mt-1 tracking-widest text-gray-400">${i.price} MAD</p>
-                    </div>
-                `).join('');
-                document.getElementById('dropCount').textContent = `${articles.length} Article(s)`;
-            });
         };
 
         window.filterGallery = (cat) => {
-            document.getElementById('galleryTitle').textContent = cat === 'homme' ? "Vestiaire Hommes" : "Vestiaire Femmes";
-            loadGallery(cat);
+            const title = document.getElementById('galleryTitle');
+            if(title) title.textContent = cat === 'homme' ? "Vestiaire Hommes" : "Vestiaire Femmes";
             document.getElementById('market-section').scrollIntoView({ behavior: 'smooth' });
+            if(window.loadGallery) window.loadGallery(cat);
         };
 
-        loadGallery();
+        // Firebase Setup
+        try {
+            if (typeof __firebase_config !== 'undefined') {
+                const config = JSON.parse(__firebase_config);
+                const app = initializeApp(config);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+                const aid = typeof __app_id !== 'undefined' ? __app_id : 'khoud-7wayji-main';
+
+                window.loadGallery = (filter = 'all') => {
+                    const q = query(collection(db, 'artifacts', aid, 'public', 'data', 'articles'));
+                    onSnapshot(q, (snap) => {
+                        const container = document.getElementById('galleryContainer');
+                        if(!container) return;
+                        let arts = [];
+                        snap.forEach(d => arts.push(d.data()));
+                        if(filter !== 'all') arts = arts.filter(a => a.category === filter);
+                        
+                        container.innerHTML = arts.length ? arts.map(i => `
+                            <div class="group cursor-pointer">
+                                <div class="aspect-[3/4] bg-gray-100 mb-4 overflow-hidden relative">
+                                    <img src="${i.imageUrl}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://api.placeholder.com/300/400?text=${i.name}'">
+                                    <div class="absolute bottom-4 right-4 bg-white px-3 py-1 text-[8px] font-bold tracking-widest uppercase">${i.size}</div>
+                                </div>
+                                <h4 class="serif text-xl font-bold">${i.name}</h4>
+                                <p class="text-[10px] font-bold mt-1 tracking-widest text-gray-400">${i.price} MAD</p>
+                            </div>
+                        `).join('') : '<p class="col-span-full text-center opacity-30 italic py-12">Bientôt de nouvelles pépites...</p>';
+                        
+                        const cnt = document.getElementById('dropCount');
+                        if(cnt) cnt.textContent = arts.length + " Article(s)";
+                    });
+                };
+
+                onAuthStateChanged(auth, (u) => { if(u) window.loadGallery(); });
+                signInAnonymously(auth);
+            }
+        } catch(e) { console.warn("Mode déconnecté."); }
     </script>
 </body>
 </html>
