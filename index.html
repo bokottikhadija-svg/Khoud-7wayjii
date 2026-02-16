@@ -163,7 +163,7 @@
     <!-- Navigation Agrandie -->
     <nav class="sticky top-0 z-[100] bg-white border-b border-[#f0f0ed]">
         <div class="max-w-[1600px] mx-auto px-6 lg:px-16">
-            <div class="flex justify-between items-center h-32"> <!-- Hauteur augmentée h-24 -> h-32 -->
+            <div class="flex justify-between items-center h-32">
                 <!-- Logo Agrandi -->
                 <div class="flex items-center space-x-8 cursor-pointer" onclick="location.reload()">
                     <div class="w-16 h-16 border border-black flex items-center justify-center overflow-hidden bg-white">
@@ -176,9 +176,14 @@
                 </div>
 
                 <div class="flex items-center space-x-6 md:space-x-12">
+                    <!-- Bouton Instagram Ajouté -->
+                    <a href="https://www.instagram.com/khoud_7wayji/" target="_blank" class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest hover:opacity-50">
+                        <i class="fa-brands fa-instagram text-lg"></i>
+                        <span class="hidden lg:inline">Instagram</span>
+                    </a>
+                    
                     <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-[11px] font-bold uppercase tracking-widest hover:opacity-50 hidden md:block">Accueil</button>
                     <button onclick="openModal('loginModal')" class="text-[11px] font-bold uppercase tracking-widest hover:opacity-50">Connexion</button>
-                    <!-- Barre d'inscription cliquable avec choix -->
                     <button onclick="openModal('signupChoiceModal')" class="text-[11px] font-bold uppercase tracking-widest border-2 border-black px-8 py-4 hover:bg-black hover:text-white transition-all">S'inscrire</button>
                 </div>
             </div>
@@ -255,7 +260,7 @@
         </div>
     </div>
 
-    <!-- MODAL DÉPÔT D'ARTICLE MODIFIÉ -->
+    <!-- MODAL DÉPÔT D'ARTICLE -->
     <div id="depositModal" class="modal">
         <div class="modal-content">
             <button onclick="closeModal('depositModal')" class="absolute top-6 right-6 text-2xl hover:opacity-50">&times;</button>
@@ -278,7 +283,6 @@
                     <input type="text" required class="input-classic" placeholder="Ex: T-shirt Oversize Noir">
                 </div>
 
-                <!-- Ajout de la Catégorie Homme / Femme -->
                 <div class="form-group">
                     <label class="form-label">Catégorie *</label>
                     <select required class="input-classic bg-white">
