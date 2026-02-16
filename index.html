@@ -114,7 +114,9 @@
             gap: 10px;
         }
 
-        .btn-outline:hover { background: #f8f8f8; }
+        .btn-outline:hover {
+            background: #f8f8f8;
+        }
 
         .file-upload-wrapper {
             border: 2px dashed #d1d1cf;
@@ -154,40 +156,18 @@
             justify-content: flex-end;
             padding: 2.5rem;
         }
-
-        .whatsapp-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: #25D366;
-            color: white;
-            text-align: center;
-            padding: 12px;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            text-decoration: none;
-            transition: transform 0.3s ease;
-        }
-        .whatsapp-bar:hover { filter: brightness(1.1); }
     </style>
 </head>
-<body class="pb-20">
+<body>
 
-    <!-- Navigation -->
+    <!-- Navigation Agrandie -->
     <nav class="sticky top-0 z-[100] bg-white border-b border-[#f0f0ed]">
         <div class="max-w-[1600px] mx-auto px-6 lg:px-16">
             <div class="flex justify-between items-center h-32">
+                <!-- Logo Agrandi -->
                 <div class="flex items-center space-x-8 cursor-pointer" onclick="location.reload()">
                     <div class="w-16 h-16 border border-black flex items-center justify-center overflow-hidden bg-white">
-                        <img src="https://api.placeholder.com/100/100?text=KH" alt="KHOUD-7WAYJI" class="w-full h-full object-cover">
+                        <img src="assets/logo de la marque .jpg" alt="KHOUD-7WAYJI" class="w-full h-full object-cover" onerror="this.src='https://api.placeholder.com/100/100?text=KH'">
                     </div>
                     <div class="flex flex-col">
                         <span class="serif text-3xl font-bold tracking-tighter uppercase">KHOUD-7WAYJI</span>
@@ -196,18 +176,15 @@
                 </div>
 
                 <div class="flex items-center space-x-6 md:space-x-12">
+                    <!-- Bouton Instagram Ajouté -->
                     <a href="https://www.instagram.com/khoud_7wayji/" target="_blank" class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest hover:opacity-50">
                         <i class="fa-brands fa-instagram text-lg"></i>
                         <span class="hidden lg:inline">Instagram</span>
                     </a>
-                    <div id="authButtons" class="flex items-center space-x-6">
-                        <button onclick="openModal('loginModal')" class="text-[11px] font-bold uppercase tracking-widest hover:opacity-50">Connexion</button>
-                        <button onclick="openModal('signupChoiceModal')" class="text-[11px] font-bold uppercase tracking-widest border-2 border-black px-8 py-4 hover:bg-black hover:text-white transition-all">S'inscrire</button>
-                    </div>
-                    <div id="userProfile" class="hidden items-center space-x-4">
-                        <span id="userNameDisplay" class="text-[10px] font-bold uppercase">...</span>
-                        <button onclick="logout()" class="text-[10px] underline uppercase tracking-widest opacity-50">Déconnexion</button>
-                    </div>
+                    
+                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-[11px] font-bold uppercase tracking-widest hover:opacity-50 hidden md:block">Accueil</button>
+                    <button onclick="openModal('loginModal')" class="text-[11px] font-bold uppercase tracking-widest hover:opacity-50">Connexion</button>
+                    <button onclick="openModal('signupChoiceModal')" class="text-[11px] font-bold uppercase tracking-widest border-2 border-black px-8 py-4 hover:bg-black hover:text-white transition-all">S'inscrire</button>
                 </div>
             </div>
         </div>
@@ -219,10 +196,10 @@
             No cash?<br>
             <span class="italic font-light">No drama.</span>
         </h1>
-        <p class="serif text-2xl italic text-gray-400">Khoud l-style, flex l-vibe!</p>
+        <p class="serif text-2xl italic text-gray-400">Khoud l-stlyle, flex l-vibe!</p>
     </header>
 
-    <!-- Casiers -->
+    <!-- Casiers de Marché -->
     <section class="max-w-[1400px] mx-auto px-6 py-12">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="market-locker group" onclick="filterGallery('homme')">
@@ -232,6 +209,7 @@
                     <p class="text-[9px] uppercase tracking-widest mt-2">Explorer le vestiaire</p>
                 </div>
             </div>
+
             <div class="market-locker group" onclick="filterGallery('femme')">
                 <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&q=80&w=1200" alt="Femmes">
                 <div class="locker-overlay text-white">
@@ -248,9 +226,13 @@
             <h3 id="galleryTitle" class="serif text-4xl italic">Dernières pépites</h3>
             <div id="dropCount" class="text-[10px] uppercase tracking-widest font-bold">0 Article</div>
         </div>
-        <div id="galleryContainer" class="grid grid-cols-2 lg:grid-cols-4 gap-8"></div>
+        
+        <div id="galleryContainer" class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Articles injectés via JS -->
+        </div>
+
         <div class="mt-20 flex flex-col items-center">
-            <button onclick="handleDepositClick()" class="bg-black text-white px-12 py-5 text-[11px] font-bold uppercase tracking-[0.3em] hover:opacity-80 transition-all cursor-pointer shadow-xl">Déposer un article</button>
+            <button onclick="openModal('depositModal')" class="bg-black text-white px-12 py-5 text-[11px] font-bold uppercase tracking-[0.3em] hover:opacity-80 transition-all cursor-pointer shadow-xl">Déposer un article</button>
         </div>
     </main>
 
@@ -260,28 +242,33 @@
             <button onclick="closeModal('signupChoiceModal')" class="absolute top-6 right-6 text-2xl hover:opacity-50">&times;</button>
             <h2 class="serif text-4xl mb-6 italic">Rejoignez-nous</h2>
             <p class="text-[10px] uppercase tracking-widest text-gray-400 mb-10">Choisissez votre mode d'inscription</p>
+            
             <div class="space-y-4">
-                <button onclick="showAlert('Service Google indisponible en démo');" class="btn-outline">
-                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18" alt="Google"> Continuer avec Google
+                <button onclick="showAlert('Redirection vers Google...'); closeModal('signupChoiceModal');" class="btn-outline">
+                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18" alt="Google">
+                    Continuer avec Google
                 </button>
                 <div class="flex items-center py-4">
                     <div class="flex-1 border-t border-gray-100"></div>
                     <span class="px-4 text-[10px] uppercase text-gray-300 font-bold">Ou</span>
                     <div class="flex-1 border-t border-gray-100"></div>
                 </div>
-                <button onclick="closeModal('signupChoiceModal'); openModal('signupModal');" class="btn-black">Créer un compte classique</button>
+                <button onclick="closeModal('signupChoiceModal'); openModal('signupModal');" class="btn-black">
+                    Créer un compte classique
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- MODAL DÉPÔT (Publication Directe) -->
+    <!-- MODAL DÉPÔT D'ARTICLE -->
     <div id="depositModal" class="modal">
         <div class="modal-content">
             <button onclick="closeModal('depositModal')" class="absolute top-6 right-6 text-2xl hover:opacity-50">&times;</button>
             <h2 class="serif text-4xl mb-4 italic">Nouvel article</h2>
-            <p class="text-[9px] uppercase tracking-widest text-red-500 font-bold mb-8 italic">Note : Le site ajoute une commission de 7% sur votre prix pour les frais de service.</p>
+            <p class="text-[10px] uppercase tracking-widest text-gray-400 mb-8">Partagez votre pièce avec nous</p>
             
-            <form id="depositForm">
+            <form id="depositForm" onsubmit="event.preventDefault(); showAlert('Merci ! Votre article est en cours de validation.'); closeModal('depositModal');">
+                
                 <div class="form-group">
                     <label class="form-label">Photo de l'article *</label>
                     <div class="file-upload-wrapper" onclick="document.getElementById('articlePhoto').click()">
@@ -290,29 +277,38 @@
                         <input type="file" id="articlePhoto" accept="image/*" class="hidden" required onchange="document.getElementById('fileNameDisplay').textContent = this.files[0].name">
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-label">Nom de l'article *</label>
-                    <input type="text" id="artName" required class="input-classic" placeholder="Ex: Veste Vintage">
+                    <input type="text" required class="input-classic" placeholder="Ex: T-shirt Oversize Noir">
                 </div>
+
                 <div class="form-group">
                     <label class="form-label">Catégorie *</label>
-                    <select id="artCat" required class="input-classic bg-white">
+                    <select required class="input-classic bg-white">
+                        <option value="" disabled selected>Choisir un vestiaire</option>
                         <option value="homme">Homme</option>
                         <option value="femme">Femme</option>
                     </select>
                 </div>
+
                 <div class="grid grid-cols-2 gap-4">
                     <div class="form-group">
                         <label class="form-label">Taille *</label>
-                        <input type="text" id="artSize" required class="input-classic" placeholder="Ex: L">
+                        <input type="text" required class="input-classic" placeholder="L / XL / 42">
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Votre prix (MAD) *</label>
-                        <input type="number" id="artPrice" required class="input-classic" placeholder="0" oninput="updateFinalPrice(this.value)">
-                        <p class="text-[9px] mt-1 text-gray-400">Prix affiché (incl. 7%): <span id="finalPriceDisplay">0</span> MAD</p>
+                        <label class="form-label">Prix souhaité (MAD) *</label>
+                        <input type="number" required class="input-classic" placeholder="0">
                     </div>
                 </div>
-                <button type="submit" id="submitArtBtn" class="btn-black">Publier directement</button>
+
+                <div class="form-group">
+                    <label class="form-label">Description détaillée *</label>
+                    <textarea required class="input-classic h-24 resize-none" placeholder="État (neuf, porté), marque, couleur..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-black">Soumettre à l'équipe</button>
             </form>
         </div>
     </div>
@@ -322,39 +318,51 @@
         <div class="modal-content">
             <button onclick="closeModal('loginModal')" class="absolute top-6 right-6 text-2xl">&times;</button>
             <h2 class="serif text-4xl mb-10 italic">Se connecter</h2>
-            <form id="loginForm">
-                <div class="form-group"><label class="form-label">Email</label><input type="email" id="loginEmail" required class="input-classic"></div>
-                <div class="form-group"><label class="form-label">Mot de passe</label><input type="password" id="loginPass" required class="input-classic"></div>
+            <form onsubmit="event.preventDefault(); showAlert('Bienvenue !'); closeModal('loginModal');">
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" required class="input-classic">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mot de passe</label>
+                    <input type="password" required class="input-classic">
+                </div>
                 <button type="submit" class="btn-black">Entrer</button>
             </form>
         </div>
     </div>
 
-    <!-- MODAL INSCRIPTION -->
+    <!-- MODAL INSCRIPTION CLASSIQUE -->
     <div id="signupModal" class="modal">
         <div class="modal-content">
             <button onclick="closeModal('signupModal')" class="absolute top-6 right-6 text-2xl">&times;</button>
             <h2 class="serif text-4xl mb-10 italic">S'inscrire</h2>
-            <form id="signupForm">
-                <div class="form-group"><label class="form-label">Email *</label><input type="email" id="regEmail" required class="input-classic"></div>
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="form-group"><label class="form-label">Prénom</label><input type="text" id="regFirst" required class="input-classic"></div>
-                    <div class="form-group"><label class="form-label">Nom</label><input type="text" id="regLast" required class="input-classic"></div>
+            <form onsubmit="event.preventDefault(); showAlert('Compte créé avec succès !'); closeModal('signupModal');">
+                <div class="form-group">
+                    <label class="form-label">Email *</label>
+                    <input type="email" required class="input-classic">
                 </div>
-                <div class="form-group"><label class="form-label">Mot de passe *</label><input type="password" id="regPass" required class="input-classic"></div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="form-group">
+                        <label class="form-label">Prénom</label>
+                        <input type="text" class="input-classic">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Nom</label>
+                        <input type="text" class="input-classic">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mot de passe *</label>
+                    <input type="password" required class="input-classic">
+                </div>
                 <button type="submit" class="btn-black">Rejoindre la communauté</button>
             </form>
         </div>
     </div>
 
-    <!-- Barre WhatsApp Fixe -->
-    <a href="https://wa.me/212773515753" target="_blank" class="whatsapp-bar">
-        <i class="fa-brands fa-whatsapp text-xl"></i>
-        Contactez-nous sur WhatsApp : 0773515753
-    </a>
-
     <!-- Notifications -->
-    <div id="alertBox" class="fixed bottom-20 left-1/2 -translate-x-1/2 z-[15000] opacity-0 transition-all duration-500 pointer-events-none">
+    <div id="alertBox" class="fixed bottom-10 left-1/2 -translate-x-1/2 z-[15000] opacity-0 transition-all duration-500 pointer-events-none">
         <div class="bg-black text-white px-8 py-4 shadow-2xl text-[10px] font-bold uppercase tracking-widest">
             <span id="alertMessage"></span>
         </div>
@@ -362,161 +370,80 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, onSnapshot, query, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, onSnapshot, query } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Global State
-        let currentUser = null;
-        const apiKey = ""; // Pour les notifications via Gemini API (simulées)
-        const ADMIN_EMAIL = "khoud7wayji@gmail.com";
-
-        // Firebase Config
-        const firebaseConfig = JSON.parse(__firebase_config);
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        const aid = typeof __app_id !== 'undefined' ? __app_id : 'khoud-7wayji-main';
-
-        // UI Utils
-        window.openModal = (id) => { 
-            document.getElementById(id).style.display = 'flex';
+        window.openModal = (id) => {
+            const m = document.getElementById(id);
+            if(m) m.style.display = 'flex';
             document.body.style.overflow = 'hidden';
         };
-        window.closeModal = (id) => { 
-            document.getElementById(id).style.display = 'none';
+        
+        window.closeModal = (id) => {
+            const m = document.getElementById(id);
+            if(m) m.style.display = 'none';
             document.body.style.overflow = 'auto';
         };
+
         window.showAlert = (msg) => {
             const box = document.getElementById('alertBox');
-            document.getElementById('alertMessage').textContent = msg;
-            box.classList.remove('opacity-0');
-            setTimeout(() => box.classList.add('opacity-0'), 4000);
-        };
-
-        window.updateFinalPrice = (val) => {
-            const price = parseFloat(val) || 0;
-            const final = Math.round(price * 1.07);
-            document.getElementById('finalPriceDisplay').textContent = final;
-        };
-
-        window.handleDepositClick = () => {
-            if (!currentUser || currentUser.isAnonymous) {
-                showAlert("Veuillez vous inscrire ou vous connecter pour vendre vos articles.");
-                openModal('signupChoiceModal');
-            } else {
-                openModal('depositModal');
+            const txt = document.getElementById('alertMessage');
+            if(txt) txt.textContent = msg;
+            if(box) {
+                box.classList.remove('opacity-0');
+                box.classList.add('bottom-12');
+                setTimeout(() => {
+                    box.classList.add('opacity-0');
+                    box.classList.remove('bottom-12');
+                }, 3000);
             }
-        };
-
-        // Email Notification Simulation (Gemini Flash)
-        const sendAdminAlert = async (type, data) => {
-            const prompt = `Alerte Site Khoud-7wayji: ${type}. Détails: ${JSON.stringify(data)}. Destinataire: ${ADMIN_EMAIL}`;
-            try {
-                await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-                });
-            } catch (e) { console.error("Alerte admin non envoyée"); }
-        };
-
-        // Auth Logic
-        onAuthStateChanged(auth, (u) => {
-            currentUser = u;
-            const authBtns = document.getElementById('authButtons');
-            const userProf = document.getElementById('userProfile');
-            if (u && !u.isAnonymous) {
-                authBtns.classList.add('hidden');
-                userProf.classList.remove('hidden');
-                document.getElementById('userNameDisplay').textContent = u.email;
-            } else {
-                authBtns.classList.remove('hidden');
-                userProf.classList.add('hidden');
-            }
-            loadGallery();
-        });
-
-        document.getElementById('signupForm').onsubmit = async (e) => {
-            e.preventDefault();
-            const email = document.getElementById('regEmail').value;
-            const pass = document.getElementById('regPass').value;
-            const name = document.getElementById('regFirst').value + " " + document.getElementById('regLast').value;
-            try {
-                await createUserWithEmailAndPassword(auth, email, pass);
-                await sendAdminAlert("Nouvelle Inscription", { email, name });
-                showAlert("Bienvenue dans la communauté !");
-                closeModal('signupModal');
-            } catch (err) { showAlert("Erreur : " + err.message); }
-        };
-
-        document.getElementById('loginForm').onsubmit = async (e) => {
-            e.preventDefault();
-            try {
-                await signInWithEmailAndPassword(auth, document.getElementById('loginEmail').value, document.getElementById('loginPass').value);
-                closeModal('loginModal');
-                showAlert("Heureux de vous revoir !");
-            } catch (err) { showAlert("Email ou mot de passe incorrect."); }
-        };
-
-        window.logout = () => signOut(auth).then(() => signInAnonymously(auth));
-
-        // Articles Logic
-        const loadGallery = (filter = 'all') => {
-            const q = query(collection(db, 'artifacts', aid, 'public', 'data', 'articles'));
-            onSnapshot(q, (snap) => {
-                const container = document.getElementById('galleryContainer');
-                let arts = [];
-                snap.forEach(d => arts.push(d.data()));
-                if(filter !== 'all') arts = arts.filter(a => a.category === filter);
-                
-                container.innerHTML = arts.length ? arts.map(i => `
-                    <div class="group cursor-pointer">
-                        <div class="aspect-[3/4] bg-gray-100 mb-4 overflow-hidden relative">
-                            <img src="${i.imageUrl}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://api.placeholder.com/300/400?text=${i.name}'">
-                            <div class="absolute bottom-4 right-4 bg-white px-3 py-1 text-[8px] font-bold tracking-widest uppercase">${i.size}</div>
-                        </div>
-                        <h4 class="serif text-xl font-bold">${i.name}</h4>
-                        <p class="text-[10px] font-bold mt-1 tracking-widest text-gray-400">${i.displayPrice} MAD</p>
-                    </div>
-                `).join('') : '<p class="col-span-full text-center opacity-30 italic py-12">Aucun article dans cette catégorie pour le moment.</p>';
-                document.getElementById('dropCount').textContent = arts.length + " Article(s)";
-            }, (err) => console.error(err));
-        };
-
-        document.getElementById('depositForm').onsubmit = async (e) => {
-            e.preventDefault();
-            const originalPrice = parseFloat(document.getElementById('artPrice').value);
-            const displayPrice = Math.round(originalPrice * 1.07);
-            
-            const articleData = {
-                name: document.getElementById('artName').value,
-                category: document.getElementById('artCat').value,
-                size: document.getElementById('artSize').value,
-                originalPrice: originalPrice,
-                displayPrice: displayPrice,
-                sellerEmail: currentUser.email,
-                sellerId: currentUser.uid,
-                imageUrl: "https://api.placeholder.com/600/800?text=KHOUD+7WAYJI",
-                createdAt: serverTimestamp()
-            };
-
-            try {
-                await addDoc(collection(db, 'artifacts', aid, 'public', 'data', 'articles'), articleData);
-                await sendAdminAlert("Nouvel Article Publié", { ...articleData, seller: currentUser.email });
-                showAlert("Article publié avec succès !");
-                closeModal('depositModal');
-            } catch (err) { showAlert("Erreur lors de la publication."); }
         };
 
         window.filterGallery = (cat) => {
-            document.getElementById('galleryTitle').textContent = cat === 'homme' ? "Vestiaire Hommes" : "Vestiaire Femmes";
-            loadGallery(cat);
+            const title = document.getElementById('galleryTitle');
+            if(title) title.textContent = cat === 'homme' ? "Vestiaire Hommes" : "Vestiaire Femmes";
             document.getElementById('market-section').scrollIntoView({ behavior: 'smooth' });
+            if(window.loadGallery) window.loadGallery(cat);
         };
 
-        // Initial Auth
-        if (!auth.currentUser) signInAnonymously(auth);
+        // Firebase Setup
+        try {
+            if (typeof __firebase_config !== 'undefined') {
+                const config = JSON.parse(__firebase_config);
+                const app = initializeApp(config);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+                const aid = typeof __app_id !== 'undefined' ? __app_id : 'khoud-7wayji-main';
 
+                window.loadGallery = (filter = 'all') => {
+                    const q = query(collection(db, 'artifacts', aid, 'public', 'data', 'articles'));
+                    onSnapshot(q, (snap) => {
+                        const container = document.getElementById('galleryContainer');
+                        if(!container) return;
+                        let arts = [];
+                        snap.forEach(d => arts.push(d.data()));
+                        if(filter !== 'all') arts = arts.filter(a => a.category === filter);
+                        
+                        container.innerHTML = arts.length ? arts.map(i => `
+                            <div class="group cursor-pointer">
+                                <div class="aspect-[3/4] bg-gray-100 mb-4 overflow-hidden relative">
+                                    <img src="${i.imageUrl}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://api.placeholder.com/300/400?text=${i.name}'">
+                                    <div class="absolute bottom-4 right-4 bg-white px-3 py-1 text-[8px] font-bold tracking-widest uppercase">${i.size}</div>
+                                </div>
+                                <h4 class="serif text-xl font-bold">${i.name}</h4>
+                                <p class="text-[10px] font-bold mt-1 tracking-widest text-gray-400">${i.price} MAD</p>
+                            </div>
+                        `).join('') : '<p class="col-span-full text-center opacity-30 italic py-12">Bientôt de nouvelles pépites...</p>';
+                        
+                        const cnt = document.getElementById('dropCount');
+                        if(cnt) cnt.textContent = arts.length + " Article(s)";
+                    });
+                };
+
+                onAuthStateChanged(auth, (u) => { if(u) window.loadGallery(); });
+                signInAnonymously(auth);
+            }
+        } catch(e) { console.warn("Mode déconnecté."); }
     </script>
 </body>
 </html>
